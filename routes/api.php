@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\api\CategoryController;
+use App\Http\Controllers\api\DesignCategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,4 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::get('/categories', [CategoryController::class, 'get']);
+Route::get('/design-categories', [DesignCategoryController::class, 'get']);

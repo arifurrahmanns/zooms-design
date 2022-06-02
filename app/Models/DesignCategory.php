@@ -11,6 +11,7 @@ class DesignCategory extends Model
 
     protected $fillable = [
         'name',
+		'desc',
         'image',
         'color',
         'is_visible',

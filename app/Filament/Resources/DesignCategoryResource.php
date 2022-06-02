@@ -12,6 +12,7 @@ use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\TextInput;
 use App\Filament\Resources\DesignCategoryResource\Pages;
 use App\Filament\Resources\DesignCategoryResource\RelationManagers;
+use App\Tables\Columns\Color;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\FileUpload;
@@ -25,7 +26,7 @@ class DesignCategoryResource extends Resource
 {
     protected static ?string $model = DesignCategory::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-puzzle';
 
     public static function form(Form $form): Form
     {
@@ -36,6 +37,7 @@ class DesignCategoryResource extends Resource
                         Card::make()->columnSpan(4)
                             ->schema([
                                 TextInput::make('name')->required(),
+                                TextInput::make('desc')->label('Description')->required(),
                                 ColorPicker::make('color')->required(),
                                 FileUpload::make('image')->image()
                                         ->maxSize(1024)
@@ -70,6 +72,7 @@ class DesignCategoryResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name'),
+				Color::make('color'),
                 ImageColumn::make('image')->rounded(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
