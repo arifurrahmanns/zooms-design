@@ -4,7 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ItemResource\Pages;
 use App\Filament\Resources\ItemResource\RelationManagers;
-use App\Models\Category;
+use App\Models\DesignCategory;
 use App\Models\Item;
 use Filament\Forms;
 use Filament\Forms\Components\Card;
@@ -14,6 +14,7 @@ use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
@@ -42,10 +43,13 @@ class ItemResource extends Resource
                                         TextInput::make('desc')->label('Description')->required(),
                                         Select::make('category_id')
                                             ->label('Category')
-                                            ->options(Category::all()->pluck('name', 'id'))
+                                            ->required()
+                                            ->options(DesignCategory::all()->pluck('name', 'id'))
                                             ->searchable(),
                                         SpatieMediaLibraryFileUpload::make('images')
                                             ->multiple()
+                                            ->imagePreviewHeight('200')
+                                            ->panelLayout('compact')
                                             ->enableReordering(),
                                 ]),
                                 Card::make()
@@ -56,18 +60,15 @@ class ItemResource extends Resource
                                         ->schema([
                                             TextInput::make('title'),
                                             TextInput::make('sub_title'),
-                                            RichEditor::make('desc')
-                                                ->label('Description')
-                                                ->disableAllToolbarButtons()
-                                                ->enableToolbarButtons([
-                                                    'bold',
-                                                    'bulletList',
-                                                    'italic',
-                                                    'strike',
-                                                ]),
-                                            TextInput::make('price')
+                                            Textarea::make('desc')->label('Description')
+                                                ->default('Outlined, no backgrounds. One page with 1 frame of rough black and white sketch, not details.'),
+                                            Textarea::make('features')->label('Features (separate by new line)')
+                                                ->default("Source files provided\nJPG, PDF, PNG, Adobe Illustrator\n1 option design"),
+                                            TextInput::make('price')->label('Price $')
                                                 ->numeric(),
-                                            TextInput::make('link'),
+                                            TextInput::make('link')->label('Order Link'),
+                                            TextInput::make('delivery_days')->label('Delivery Date')->default('3 Days Delivery'),
+                                            TextInput::make('revisions')->label('Revision')->default('Unlimited Revisions'),
                                         ])
                                         ->dehydrated()
                                         ->defaultItems(1)

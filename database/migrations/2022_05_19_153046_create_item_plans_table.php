@@ -18,6 +18,9 @@ class CreateItemPlansTable extends Migration
             $table->string('title');
             $table->string('sub_title');
             $table->text('desc');
+            $table->text('features');
+            $table->text('delivery_days');
+            $table->text('revisions');
             $table->decimal('price', 10, 2);
             $table->string('link');
 

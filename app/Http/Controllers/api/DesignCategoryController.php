@@ -9,6 +9,6 @@ class DesignCategoryController extends Controller
 {
 
     public function get() {
-        return DesignCategory::where('is_visible', true)->select(['id', 'name', 'color', 'desc'])->get();
+        return DesignCategory::where('is_visible', 1)->select(['id', 'name', 'color', 'desc'])->get();
     }
 }

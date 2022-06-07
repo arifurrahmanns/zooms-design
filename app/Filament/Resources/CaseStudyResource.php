@@ -5,7 +5,6 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\CaseStudyResource\Pages;
 use App\Filament\Resources\CaseStudyResource\RelationManagers;
 use App\Models\CaseStudy;
-use App\Models\Category;
 use Filament\Forms;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Grid;

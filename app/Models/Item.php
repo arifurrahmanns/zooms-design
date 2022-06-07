@@ -20,10 +20,32 @@ class Item extends Model implements HasMedia
     ];
 
     public function category() {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(DesignCategory::class);
     }
 
     public function plans() {
         return $this->hasMany(ItemPlan::class, 'item_id');
+    }
+
+    public static function withPlans($categoryId = null) {
+
+        $query = Item::with([
+            'plans' => function ($q) {
+                $q->select([
+                    'id', 'title', 'sub_title', 'desc', 'features', 'delivery_days', 'revisions', 'price', 'link', 'item_id',
+                ]);
+            },
+            'media',
+            'category',
+        ])
+            ->select([
+                'id', 'title', 'desc', 'category_id',
+            ])
+            ->where('is_visible', 1);
+
+        if ($categoryId != null) {
+            $query->where('category_id', $categoryId);
+        }
+        return $query;
     }
 }

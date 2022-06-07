@@ -77,11 +77,12 @@ class ContactUsResource extends Resource
                 Tables\Columns\TextColumn::make('email')->sortable()->searchable(),
                 InquiryStatus::make('status')->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
+                    ->dateTime()->sortable(),
             ])
             ->filters([
                 //
-            ]);
+            ])
+            ->defaultSort('status');;
     }
 
     public static function getRelations(): array

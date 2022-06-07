@@ -15,5 +15,9 @@ class ItemPlan extends Model
         'desc',
         'price',
         'link',
+
+        'features',
+        'delivery_days',
+        'revisions',
     ];
 }
