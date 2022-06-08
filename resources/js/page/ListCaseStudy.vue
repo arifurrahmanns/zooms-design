@@ -16,15 +16,15 @@ let trusteds = [
     { name: "Decathlon", image: "/images/brand/decathlon.png"},
 ]
 const caseStudies = [
-    { id: 1, name: "Spring Dress Try - On Haul", desc: "This is one of my favorite dress designers (has been for years!). Every detail in this dress (30%…", image: "/images/case/1.png", date: "April 24, 2021", author: "admin" },
-    { id: 2, name: "Aliquam vel ante mattis", desc: "Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu ex. Aenean posuere libero eu augue condimentum…", image: "/images/case/2.png", date: "November 29, 2021", author: "admin" },
-    { id: 3, name: "Praesent imperdiet going", desc: "Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu ex. Aenean posuere libero eu augue condimentum…", image: "/images/case/3.png", date: "July 13, 2021", author: "admin" },
-    { id: 4, name: "Spring Dress Try - On Haul", desc: "This is one of my favorite dress designers (has been for years!). Every detail in this dress (30%…", image: "/images/case/1.png", date: "April 24, 2021", author: "admin" },
-    { id: 5, name: "Aliquam vel ante mattis", desc: "Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu ex. Aenean posuere libero eu augue condimentum…", image: "/images/case/2.png", date: "November 29, 2021", author: "admin" },
-    { id: 6, name: "Praesent imperdiet going", desc: "Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu ex. Aenean posuere libero eu augue condimentum…", image: "/images/case/3.png", date: "July 13, 2021", author: "admin" },
-    { id: 7, name: "Spring Dress Try - On Haul", desc: "This is one of my favorite dress designers (has been for years!). Every detail in this dress (30%…", image: "/images/case/1.png", date: "April 24, 2021", author: "admin" },
-    { id: 8, name: "Aliquam vel ante mattis", desc: "Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu ex. Aenean posuere libero eu augue condimentum…", image: "/images/case/2.png", date: "November 29, 2021", author: "admin" },
-    { id: 9, name: "Praesent imperdiet going", desc: "Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu ex. Aenean posuere libero eu augue condimentum…", image: "/images/case/3.png", date: "July 13, 2021", author: "admin" },
+    { id: 1, name: "Spring Dress Try - On Haul", desc: "This is one of my favorite dress designers (has been for years!). Every detail in this dress (30%…", thumbnail: "/images/case/1.png", date: "April 24, 2021", author: "admin" },
+    { id: 2, name: "Aliquam vel ante mattis", desc: "Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu ex. Aenean posuere libero eu augue condimentum…", thumbnail: "/images/case/2.png", date: "November 29, 2021", author: "admin" },
+    { id: 3, name: "Praesent imperdiet going", desc: "Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu ex. Aenean posuere libero eu augue condimentum…", thumbnail: "/images/case/3.png", date: "July 13, 2021", author: "admin" },
+    { id: 4, name: "Spring Dress Try - On Haul", desc: "This is one of my favorite dress designers (has been for years!). Every detail in this dress (30%…", thumbnail: "/images/case/1.png", date: "April 24, 2021", author: "admin" },
+    { id: 5, name: "Aliquam vel ante mattis", desc: "Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu ex. Aenean posuere libero eu augue condimentum…", thumbnail: "/images/case/2.png", date: "November 29, 2021", author: "admin" },
+    { id: 6, name: "Praesent imperdiet going", desc: "Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu ex. Aenean posuere libero eu augue condimentum…", thumbnail: "/images/case/3.png", date: "July 13, 2021", author: "admin" },
+    { id: 7, name: "Spring Dress Try - On Haul", desc: "This is one of my favorite dress designers (has been for years!). Every detail in this dress (30%…", thumbnail: "/images/case/1.png", date: "April 24, 2021", author: "admin" },
+    { id: 8, name: "Aliquam vel ante mattis", desc: "Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu ex. Aenean posuere libero eu augue condimentum…", thumbnail: "/images/case/2.png", date: "November 29, 2021", author: "admin" },
+    { id: 9, name: "Praesent imperdiet going", desc: "Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu ex. Aenean posuere libero eu augue condimentum…", thumbnail: "/images/case/3.png", date: "July 13, 2021", author: "admin" },
 ]
 </script>
 

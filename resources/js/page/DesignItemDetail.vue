@@ -4,9 +4,10 @@ import { getItemDetail, getListItemByCategory } from '../api/api';
 import Breadcrum from '../components/item/Breadcrum.vue';
 import { store } from '../store'
 import NotFoundVue from './NotFound.vue';
+import DesignCategoryMenu from '../components/common/DesignCategoryMenu.vue'
 export default {
     name: "DesignItemDetail",
-    components: { Breadcrum, NotFoundVue },
+    components: { Breadcrum, NotFoundVue, DesignCategoryMenu },
     data() {
         return {
             images: [],
@@ -109,6 +110,7 @@ export default {
 </script>
 <template>
 	<div v-if="plans.length > 0">
+        <design-category-menu/>
         <Breadcrum :bgcolor="'#FFEAF4'" :breadcrumbs="breadcrumbs"/>
         <div class="max-w-7xl mx-auto px-4 mt-14">
             <div class="grid gap-4 grid-cols-1 lg:grid-cols-2">
