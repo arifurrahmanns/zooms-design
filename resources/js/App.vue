@@ -13,7 +13,7 @@ export default {
     }
   },
   async mounted() {
-    this.store.categories = await getCategories()
+    this.store.categories = (await getCategories()).data
   }
 }
 </script>

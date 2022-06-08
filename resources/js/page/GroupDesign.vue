@@ -5,6 +5,7 @@ import { store } from '../store'
 import ListEachCategory from '../components/list-item/ListEachCategory.vue';
 import { computed, onMounted, ref } from '@vue/runtime-core';
 import BrowseByCategory from '../components/list-item/BrowseByCategory.vue';
+import NotFoundVue from './NotFound.vue';
 import { getListItemByCategory } from '../api/api';
 
 </script>
@@ -33,7 +34,7 @@ export default {
         }
     },
     async mounted() {
-        const data = await getListItemByCategory(this.$route.params.id)
+        const data = await getListItemByCategory(this.$route.params.id, 50)
         console.log(data)
         this.items = data.data
     }
@@ -41,9 +42,14 @@ export default {
 </script>
 
 <template>
-	<DesignCategoryMenu/>
-	<Breadcrum :bgcolor="'#E0F9FF'" :breadcrumbs="[{ title: 'All Items' }, { title: activeCategory.name }]"/>
+	<div v-if="items.length > 0">
+        <DesignCategoryMenu/>
+        <Breadcrum :bgcolor="'#E0F9FF'" :breadcrumbs="[{ title: 'All Items' }, { title: activeCategory.name }]"/>
 
-    <ListEachCategory :id="category.id" :name="category.name" :color="category.color" :items="items"/>
-    <BrowseByCategory :active-category-id="activeCategory.id" />
+        <ListEachCategory :id="category.id" :name="category.name" :color="category.color" :items="items"/>
+        <BrowseByCategory :active-category-id="activeCategory.id" />
+    </div>
+    <div v-else>
+        <NotFoundVue/>
+    </div>
 </template>

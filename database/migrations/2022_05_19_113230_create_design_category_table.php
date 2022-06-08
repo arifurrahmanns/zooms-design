@@ -18,8 +18,8 @@ class CreateDesignCategoryTable extends Migration
             $table->string('name');
             $table->string('desc');
             $table->boolean('is_visible');
-            $table->string('image');
             $table->string('color');
+            $table->string('bg_color');
             $table->timestamps();
         });
     }

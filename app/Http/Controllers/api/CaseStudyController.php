@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\CaseStudyResource;
+use App\Http\Resources\api\CaseStudyResource;
 use App\Models\CaseStudy;
 use Illuminate\Http\Request;
 

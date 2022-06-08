@@ -4,19 +4,7 @@ import TrustedBrand from '../components/common/TrustedBrand.vue';
 import ServiceBundle from '../components/home/ServiceBundle.vue';
 import ListItem from '../components/home/ListItem.vue';
 import LastestCaseStudy from '../components/home/LastestCaseStudy.vue';
-let categories = [
-    { name: "Design", bgColor: "#FFE9EA", image: "/images/design/design.png"},
-    { name: "Design", bgColor: "#5CD0EB", image: "/images/design/design-white.png"},
-    { name: "Security", bgColor: "#FFF8E8", image: "/images/design/security.png"},
-    { name: "Research", bgColor: "#FFEACC", image: "/images/design/research.png"},
-    { name: "Gaming", bgColor: "#F2F4FC", image: "/images/design/gaming.png"},
-    { name: "Design", bgColor: "#E5E5E5", image: "/images/design/design-gray.png"},
-    { name: "Design", bgColor: "#F0FFE7", image: "/images/design/design-green.png"},
-    { name: "Security", bgColor: "#FFEAF4", image: "/images/design/security-red.png"},
-    { name: "Research", bgColor: "#E0F9FF", image: "/images/design/research-blue.png"},
-    { name: "Gaming", bgColor: "#FFF8E8", image: "/images/design/gaming-yellow.png"},
-];
-
+import { store } from '../store'
 
 let services = [
     { name: "Item #1<br> name", image: "/images/service/1.png", link: "/" },
@@ -57,10 +45,10 @@ let flows = [
     <div class="max-w-7xl mx-auto py-8 px-4">
         <h2 class="font-bold mb-4 md:mb-6 md:text-xl">Design Categories</h2>
         <div class="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-8">
-            <div v-for="cat in categories" :key="cat.name">
-                <a href="#" :style="`background-color: ${cat.bgColor}`" class="rounded aspect-square flex justify-center items-center flex-col space-y-2 hover:shadow-lg">
+            <div v-for="cat in store.categories" :key="cat.name">
+                <a :href="`/categories/${cat.id}`" :style="`background-color: ${cat.bg_color}`" class="rounded aspect-square flex justify-center items-center flex-col space-y-2 hover:shadow-lg">
                     <img :src="cat.image" :alt="cat.name" class="max-w-[60px]">
-                    <div class="font-bold">
+                    <div class="font-bold capitalize">
                         {{ cat.name }}
                     </div>
                 </a>

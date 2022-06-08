@@ -29,7 +29,7 @@ Route::post('/items', [ItemController::class, 'listItems']);
 Route::post('/items/popular', [ItemController::class, 'listPopularItems']);
 Route::post('/items/all-categories', [ItemController::class, 'listItemForAllCategories']);
 Route::post('/items/category', [ItemController::class, 'listItemByCategory']);
-// Route::post('/item/:id', [ItemController::class, 'itemDetail']);
+Route::post('/item/info', [ItemController::class, 'itemDetail']);
 
 Route::post('/case-studies', [CaseStudyController::class, 'listCaseStudies']);
 Route::post('/case-study/:id', [CaseStudyController::class, 'caseStudyDetail']);

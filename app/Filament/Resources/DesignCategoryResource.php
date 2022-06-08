@@ -11,16 +11,14 @@ use Filament\Resources\Resource;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\TextInput;
 use App\Filament\Resources\DesignCategoryResource\Pages;
-use App\Filament\Resources\DesignCategoryResource\RelationManagers;
 use App\Tables\Columns\Color;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\ColorPicker;
-use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Placeholder;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Toggle;
 use Filament\Tables\Columns\BooleanColumn;
-use Filament\Tables\Columns\Column;
-use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 
 class DesignCategoryResource extends Resource
 {
@@ -39,9 +37,14 @@ class DesignCategoryResource extends Resource
                                 TextInput::make('name')->required(),
                                 TextInput::make('desc')->label('Description')->required(),
                                 ColorPicker::make('color')->required(),
-                                FileUpload::make('image')->image()
-                                        ->maxSize(1024)
-                                        ->imageCropAspectRatio('1:1')
+                                ColorPicker::make('bg_color')->required()->label('Background Color'),
+                                SpatieMediaLibraryFileUpload::make('image')
+                                    ->collection('image')
+                                    ->required()
+                                    ->imagePreviewHeight('200')
+                                    ->panelLayout('compact')
+                                    ->maxSize(1024)
+                                    ->imageCropAspectRatio('1:1'),
                             ]),
                         Grid::make()->columnSpan(2)
                             ->schema([
@@ -73,7 +76,7 @@ class DesignCategoryResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name'),
 				Color::make('color'),
-                ImageColumn::make('image')->rounded(),
+                SpatieMediaLibraryImageColumn::make('image')->collection('image')->rounded(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')

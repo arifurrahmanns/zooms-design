@@ -22,7 +22,7 @@ class ItemResource extends JsonResource
             "category_id" => $this->category_id,
             "category" => $this->category->name,
             "price" => count($this->plans) > 0 ? $this->plans[0]->price : 0,
-            "media" => $this->getFirstMediaUrl(),
+            "media" => $this->getMedia('images')[0]->getFullUrl(),
             "plans" => $this->plans,
         ];
     }

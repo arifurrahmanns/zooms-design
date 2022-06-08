@@ -21,6 +21,10 @@ export const getListItemForAllDesign = async (data) => {
     return (await axios.post(`/api/items/all-categories`, data)).data
 }
 
-export const getListItemByCategory = async (id) => {
-    return (await axios.post(`/api/items/category`, { id })).data
+export const getListItemByCategory = async (id, limit) => {
+    return (await axios.post(`/api/items/category`, { id, limit })).data
+}
+
+export const getItemDetail = async (id) => {
+    return (await axios.post(`/api/item/info`, { id })).data
 }

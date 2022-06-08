@@ -4,7 +4,7 @@ namespace App\Http\Resources\api;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CategoryResource extends JsonResource
+class DesignCategoryResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,8 +15,12 @@ class CategoryResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $request->id,
-            'name' => $request->name,
+            'id' => $this->id,
+            'name' => $this->name,
+            'desc' => $this->desc,
+            'color' => $this->color,
+            'bg_color' => $this->bg_color,
+            'image' => $this->getMedia('image')[0]->getFullUrl(),
         ];
     }
 }

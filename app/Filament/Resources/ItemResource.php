@@ -47,6 +47,7 @@ class ItemResource extends Resource
                                             ->options(DesignCategory::all()->pluck('name', 'id'))
                                             ->searchable(),
                                         SpatieMediaLibraryFileUpload::make('images')
+                                            ->collection('images')
                                             ->multiple()
                                             ->imagePreviewHeight('200')
                                             ->panelLayout('compact')

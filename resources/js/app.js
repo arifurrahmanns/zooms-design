@@ -18,7 +18,7 @@ import Home from "./page/Home.vue";
 import About from "./page/About.vue";
 import Blogs from "./page/Blogs.vue"
 import Term from "./page/Term.vue"
-import ItemDetail from "./page/ItemDetail.vue"
+import DesignItemDetail from "./page/DesignItemDetail.vue"
 import CaseStudyDetail from "./page/CaseStudyDetail.vue"
 import ListDesign from "./page/ListDesign.vue"
 import NotFound from "./page/NotFound.vue"
@@ -34,7 +34,7 @@ const routes = [
     { path: '/term-condition', name: "term", component: Term, meta: { title: 'Term and Condition'} },
     { path: '/privacy', name: "privacy", component: Term, meta: { title: 'Term and Condition'} },
     { path: '/cookie', name: "cookie", component: Term, meta: { title: 'Term and Condition'} },
-    { path: '/items/:id', name: "item-detail", component: ItemDetail, meta: { title: 'Designs'} },
+    { path: '/items/:id', name: "item-detail", component: DesignItemDetail, meta: { title: 'Designs'} },
     { path: '/categories/:id', name: "group-item", component: GroupDesign, meta: { title: 'Designs'} },
     { path: '/case-studies', name: "case-studies", component: ListCaseStudy, meta: { title: 'Case Studies'} },
     { path: '/case-studies/:id', name: "case-study-detail", component: CaseStudyDetail, meta: { title: 'Case Studies'} },

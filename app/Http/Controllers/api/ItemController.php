@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\api\ItemResource as ResourcesItemResource;
+use App\Http\Resources\api\ItemDetailResource;
 use App\Models\DesignCategory;
 use App\Models\Item;
 use Illuminate\Http\Request;
@@ -25,8 +26,9 @@ class ItemController extends Controller
             'id' => 'required',
         ]);
         $categoryId = $request->id;
+        $limit = $request->input('limit', 50);
         $items = Item::withPlans($categoryId)
-                        ->limit(50)
+                        ->limit($limit)
                         ->get();
         return response()->json([
             'success' => 'success',
@@ -62,13 +64,13 @@ class ItemController extends Controller
         ], 200);
     }
 
-    public function itemDetail(Request $request, int $id)
-    {
-        $item = Item::with('plans')->find($id);
+    public function itemDetail(Request $request) {
+        $request->validate(['id' => 'required']);
+        $item = Item::with('plans', 'media')->find($request->id);
 
         return response()->json([
             'success' => 'success',
-            'data' => $item,
+            'data' => ItemDetailResource::make($item),
         ], 200);
     }
 }

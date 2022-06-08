@@ -29,6 +29,7 @@
         "@vueuse/core": "^8.6.0",
         "mosha-vue-toastify": "^1.0.23",
         "vue": "^3.2.36",
-        "vue-router": "^4.0.15"
+        "vue-router": "^4.0.15",
+        "vue-slick-carousel": "^1.0.6"
     }
 }
