@@ -11,5 +11,6 @@ class PostCategory extends Model
 
     protected $fillable = [
         'name',
+        'desc'
     ];
 }

@@ -6,6 +6,10 @@ use App\Filament\Resources\PostCategoryResource\Pages;
 use App\Filament\Resources\PostCategoryResource\RelationManagers;
 use App\Models\PostCategory;
 use Filament\Forms;
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Placeholder;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -23,7 +27,26 @@ class PostCategoryResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Grid::make()->columns(6)
+                    ->schema([
+                        Card::make()->columnSpan(4)
+                            ->schema([
+                                TextInput::make('name')->required(),
+                                TextInput::make('desc')->label('Description')->required(),
+                            ]),
+                        Grid::make()->columnSpan(2)
+                            ->schema([
+                                Forms\Components\Card::make()
+                                    ->schema([
+                                        Forms\Components\Placeholder::make('created_at')
+                                            ->label('Created at')
+                                            ->content(fn (?PostCategory $record): string => $record ? $record->created_at->diffForHumans() : '-'),
+                                        Forms\Components\Placeholder::make('updated_at')
+                                            ->label('Last modified at')
+                                            ->content(fn (?PostCategory $record): string => $record ? $record->updated_at->diffForHumans() : '-'),
+                                    ])
+                            ])
+                    ])
             ]);
     }
 
@@ -31,7 +54,11 @@ class PostCategoryResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime(),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime(),
             ])
             ->filters([
                 //

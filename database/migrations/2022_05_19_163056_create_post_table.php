@@ -16,10 +16,9 @@ class CreatePostTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('thumbnail');
             $table->text('content');
             $table->foreignId('category_id');
-            $table->foreignId('author_id');
+            $table->string('author_name');
             $table->boolean('is_visible');
             $table->timestamps();
         });

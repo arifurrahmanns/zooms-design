@@ -3,37 +3,37 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\api\CaseStudyDetailResource;
-use App\Http\Resources\api\CaseStudyResource;
-use App\Models\CaseStudy;
+use App\Http\Resources\api\PostDetailResource;
+use App\Http\Resources\api\PostResource;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
-class CaseStudyController extends Controller
+class PostController extends Controller
 {
-    public function listCaseStudies(Request $request)
+    public function listPosts(Request $request)
     {
         $limit = $request->input('limit', 50);
-        $casStudies = CaseStudy::with(['media'])->where('is_visible', 1)
+        $casStudies = Post::with(['media'])->where('is_visible', 1)
             ->limit($limit)
             ->latest()
             ->get();
 
         return response()->json([
             'success' => 'success',
-            'data' => CaseStudyResource::collection($casStudies),
+            'data' => PostResource::collection($casStudies),
         ], 200);
     }
 
-    public function caseStudyDetail(Request $request)
+    public function postDetail(Request $request)
     {
         $request->validate(['id' => 'required']);
         $id = $request->id;
-        $data = CaseStudy::with(['media'])
+        $data = Post::with(['media'])
             ->where('is_visible', 1)
             ->find($id);
         return response()->json([
             'success' => 'success',
-            'data' => CaseStudyDetailResource::make($data),
+            'data' => PostDetailResource::make($data),
         ], 200);
     }
 }

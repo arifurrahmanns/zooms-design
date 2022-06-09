@@ -2,7 +2,7 @@
 <template>
     <div class="max-w-7xl mx-auto py-8 px-4">
         <div class="mb-4 md:mb-6">
-            <h2 class="font-bold md:text-xl">Case study</h2>
+            <h2 class="font-bold md:text-xl" v-text="label || 'Case study'"></h2>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 snap-x">
             <div v-for="caseStudy in caseStudies" :key="caseStudy.id" class="">
@@ -15,6 +15,7 @@
 import { getListCaseStudy } from '../../api/api';
 import CaseStudyItem from '../item/CaseStudyItem.vue'
 export default {
+    props: ['label'],
     data() {
         return {
             caseStudies: []

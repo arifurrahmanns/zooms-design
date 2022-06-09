@@ -4,6 +4,7 @@ import FooterVue from "./components/Footer.vue";
 import Contact from './components/Contact.vue';
 import { getCategories } from "./api/api";
 import { store } from './store'
+
 </script>
 <script>
 export default {
@@ -19,13 +20,7 @@ export default {
 </script>
 
 <template>
-  <div>
     <Navbar/>
-  </div>
-  <div>
     <router-view></router-view>
-  </div>
-  <div>
     <FooterVue />
-  </div>
 </template>

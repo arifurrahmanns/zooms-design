@@ -4,6 +4,7 @@ use App\Http\Controllers\api\CaseStudyController;
 use App\Http\Controllers\api\DesignCategoryController;
 use App\Http\Controllers\api\InquiryController;
 use App\Http\Controllers\api\ItemController;
+use App\Http\Controllers\api\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,5 +32,9 @@ Route::post('/items/all-categories', [ItemController::class, 'listItemForAllCate
 Route::post('/items/category', [ItemController::class, 'listItemByCategory']);
 Route::post('/item/info', [ItemController::class, 'itemDetail']);
 
+
+Route::post('/posts', [PostController::class, 'listPosts']);
+Route::post('/post/info', [PostController::class, 'postDetail']);
+
 Route::post('/case-studies', [CaseStudyController::class, 'listCaseStudies']);
-Route::post('/case-study/:id', [CaseStudyController::class, 'caseStudyDetail']);
+Route::post('/case-study/info', [CaseStudyController::class, 'caseStudyDetail']);

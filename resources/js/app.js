@@ -16,7 +16,7 @@ import 'mosha-vue-toastify/dist/style.css'
 
 import Home from "./page/Home.vue";
 import About from "./page/About.vue";
-import Blogs from "./page/Blogs.vue"
+import ListPost from "./page/ListPost.vue"
 import Term from "./page/Term.vue"
 import DesignItemDetail from "./page/DesignItemDetail.vue"
 import CaseStudyDetail from "./page/CaseStudyDetail.vue"
@@ -25,12 +25,14 @@ import NotFound from "./page/NotFound.vue"
 import BecomeMember from "./page/BecomeMember.vue"
 import GroupDesign from "./page/GroupDesign.vue"
 import ListCaseStudy from "./page/ListCaseStudy.vue"
+import PostDetail from './page/PostDetail.vue'
 
 
 const routes = [
     { path: '/', name: "home", component: Home, },
     { path: '/about', name: "about", component: About, meta: { title: 'About Us'} },
-    { path: '/blogs', name: "blogss", component: Blogs, meta: { title: 'Blogs'} },
+    { path: '/blogs', name: "blogs", component: ListPost, meta: { title: 'Blogs'} },
+    { path: '/post/:id', name: "bloga-detail", component: PostDetail, meta: { title: 'Post Detail'} },
     { path: '/term-condition', name: "term", component: Term, meta: { title: 'Term and Condition'} },
     { path: '/privacy', name: "privacy", component: Term, meta: { title: 'Term and Condition'} },
     { path: '/cookie', name: "cookie", component: Term, meta: { title: 'Term and Condition'} },

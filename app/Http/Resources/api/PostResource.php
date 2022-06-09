@@ -2,11 +2,10 @@
 
 namespace App\Http\Resources\api;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Str;
 
-use Illuminate\Http\Resources\Json\JsonResource;
-
-class CaseStudyResource extends JsonResource
+class PostResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

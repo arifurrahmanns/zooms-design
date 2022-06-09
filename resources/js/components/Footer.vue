@@ -55,7 +55,7 @@ export default {
                             <button @click="this.$refs.contact.show()" class="text-sm hover:text-[#5CD0EB] block">Contact</button>
                         </div>
                         <div class="flex">
-                            <a href="/blog" class="text-sm hover:text-[#5CD0EB] block">Blog</a>
+                            <a href="/blogs" class="text-sm hover:text-[#5CD0EB] block">Blog</a>
                         </div>
                     </div>
                 </div>
