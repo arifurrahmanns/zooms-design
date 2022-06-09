@@ -26,6 +26,7 @@ import BecomeMember from "./page/BecomeMember.vue"
 import GroupDesign from "./page/GroupDesign.vue"
 import ListCaseStudy from "./page/ListCaseStudy.vue"
 import PostDetail from './page/PostDetail.vue'
+import SearchItem from './page/SearchItem.vue'
 
 
 const routes = [
@@ -36,6 +37,7 @@ const routes = [
     { path: '/term-condition', name: "term", component: Term, meta: { title: 'Term and Condition'} },
     { path: '/privacy', name: "privacy", component: Term, meta: { title: 'Term and Condition'} },
     { path: '/cookie', name: "cookie", component: Term, meta: { title: 'Term and Condition'} },
+    { path: '/items/search', name: "search-item", component: SearchItem, meta: { title: 'Designs'} },
     { path: '/items/:id', name: "item-detail", component: DesignItemDetail, meta: { title: 'Designs'} },
     { path: '/categories/:id', name: "group-item", component: GroupDesign, meta: { title: 'Designs'} },
     { path: '/case-studies', name: "case-studies", component: ListCaseStudy, meta: { title: 'Case Studies'} },

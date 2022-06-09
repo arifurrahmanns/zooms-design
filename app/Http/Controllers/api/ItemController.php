@@ -8,6 +8,7 @@ use App\Http\Resources\api\ItemDetailResource;
 use App\Models\DesignCategory;
 use App\Models\Item;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ItemController extends Controller
 {
@@ -35,13 +36,25 @@ class ItemController extends Controller
             'data' => ResourcesItemResource::collection($items),
         ], 200);
     }
-    public function listItemForAllCategories() {
+    public function listItemForAllCategories(Request $request) {
+
+        $title = $request->title;
+
         $categories = DesignCategory::where('is_visible', 1)->select('id')->get();
         $result = collect();
         foreach ($categories as $category) {
-            $items = Item::withPlans($category->id)
-                        ->limit(4)
-                        ->get();
+            $items = Item::withPlans($category->id);
+            if ($title) {
+                $items = $items
+                    ->where(DB::raw('lower(title)'), 'like', '%' . strtolower($title) . '%')
+                    ->limit(50)
+                    ->get();
+            } else {
+                $items = $items
+                    ->limit(4)
+                    ->get();
+            }
+
             if(count($items) > 0) {
                 $result = $result->merge($items);
             }

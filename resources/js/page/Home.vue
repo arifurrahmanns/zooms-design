@@ -22,7 +22,24 @@ let flows = [
     { name: "Get your design", desc: "On all orders over<br> $75.00" },
 ]
 
+</script>
+<script>
+export default {
+    data() {
+        return {
+            search: null,
+        }
+    },
+    methods: {
+        searchDesign() {
+            if (!this.search) {
+                return
+            }
 
+            this.$router.push({path: '/items/search', query: {query: this.search}})
+        }
+    }
+}
 </script>
 
 <template>
@@ -32,12 +49,12 @@ let flows = [
             <div class="absolute top-[25%] left-[10%] md:space-y-3 w-[40%] md:w-[25%]">
                 <h1 class="md:text-3xl font-bold">I want to design</h1>
                 <div class="md:text-3xl font-bold text-[#5CD0EB]">product label_</div>
-                <div class="relative mt-2">
-                    <input type="text" autocomplete="off" name="search" class="border-0 bg-white rounded-md px-2 py-1 md:p-4 w-full text-[15px] md:text-base" placeholder="Search">
-                    <button class="absolute w-6 h-6 top-1 md:w-8 md:h-8 right-1 md:top-3 md:right-3">
-                        <img src="/images/icon/search.png" alt="Search" class="">
+                <form @submit.prevent="searchDesign" ref="formSearch" class="relative mt-2">
+                    <input type="text" autocomplete="off" v-model="search" class="border-0 bg-white rounded-md px-2 py-1 md:p-4 w-full text-[15px] md:text-base" placeholder="Search">
+                    <button type="submit" class="absolute w-6 h-6 top-1 md:w-8 md:h-8 right-1 md:top-3 md:right-3">
+                        <img src="/images/icon/search.png" alt="Search">
                     </button>
-                </div>
+                </form>
             </div>
         </div>
     </div>
