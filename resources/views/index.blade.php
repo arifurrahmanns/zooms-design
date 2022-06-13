@@ -14,6 +14,9 @@
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css'>
     <link rel='stylesheet' href='https://kenwheeler.github.io/slick/slick/slick-theme.css'>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <meta name="description" content="Zooms Design is a graphic design platform specialize in ads design, digital, and print starting from 295$/month.">
+    <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="32x32">
 </head>
 <body>
     <div id="app"></div>
