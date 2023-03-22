@@ -14,16 +14,21 @@ class ItemResource extends JsonResource
      */
     public function toArray($request)
     {
-        // return parent::toArray($request);
+        $image = asset('images/placeholder.png');
+        try {
+            $image = $this->getMedia('images')[0]->getFullUrl();
+        } catch (\Throwable $th) {}
         return [
-            "id" => $this->id,
-            "title" => $this->title,
-            "desc" => $this->desc,
-            "category_id" => $this->category_id,
-            "category" => $this->category->name,
-            "price" => count($this->plans) > 0 ? $this->plans[0]->price : 0,
-            "media" => $this->getMedia('images')[0]->getFullUrl(),
-            "plans" => $this->plans,
+            'id' => $this->id,
+            'title' => $this->title,
+            'slug' => $this->slug,
+            'desc' => $this->desc,
+            'category_id' => $this->category_id,
+            'category' => $this->category,
+            'price' => count($this->plans) > 0 ? $this->plans[0]->price : 0,
+            'media' => $image,
+            'plans' => $this->plans,
+            'discount' => count($this->plans) > 0 ? $this->plans[0]->discount : 0,
         ];
     }
 }

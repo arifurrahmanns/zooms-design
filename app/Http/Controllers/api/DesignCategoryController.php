@@ -9,11 +9,12 @@ use App\Models\DesignCategory;
 class DesignCategoryController extends Controller
 {
 
-    public function get() {
+    public function get()
+    {
         $data = DesignCategory::with(['media'])
-                ->where('is_visible', 1)
-                ->select(['id', 'name', 'color', 'desc', 'bg_color'])
-                ->get();
+            ->where('is_visible', 1)
+            ->select(['id', 'name', 'color', 'desc', 'bg_color'])
+            ->get();
 
         return response()->json([
             'success' => 'success',

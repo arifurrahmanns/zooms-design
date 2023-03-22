@@ -1,14 +1,14 @@
 <script>
 export default {
-	props: ['id', 'name', 'color', 'showSeeMoreButton', 'items'],
+	props: ['id', 'name', 'color', 'showSeeMoreButton', 'items', 'slug'],
 }
 </script>
 
 <template>
-    <div v-if="items.length > 0" class="max-w-7xl mx-auto py-8 px-4">
+    <div v-if="items.length > 0" class="mx-auto py-8 px-4 xl:px-16">
         <div class="flex justify-between items-center mb-4 md:mb-6">
             <h2 class="font-semibold md:text-xl capitalize" :style="`color: ${color}`">{{ name }} </h2>
-            <a v-if="showSeeMoreButton == true" :href="`/categories/${id}`" class="flex space-x-3 items-center hover:animate-bounceX">
+            <a v-if="showSeeMoreButton == true" :href="`/categories/${slug}`" class="flex space-x-3 items-center hover:animate-bounceX">
 				<span class="font-semibold md:text-xl" :style="`color: ${color}`">
 					See more
 				</span>
@@ -19,12 +19,12 @@ export default {
         </div>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-8 snap-x">
             <div v-for="item in items" :key="item.id" class="snap-center">
-                <a :href="`/items/${item.id}`" class="border border-[#EBEBEB] rounded flex flex-col p-3 hover:shadow-lg hover:cursor-pointer">
-                    <img :src="item.media" :alt="item.title" class="mb-2">
+                <a :href="`/items/${item.slug}`" class="border border-[#EBEBEB] rounded flex flex-col p-3 hover:shadow-lg hover:cursor-pointer">
+                    <img :src="item.media" :alt="item.title" class="mb-2 aspect-[3/2]">
                     <div class="text-center text-sm">
                         <h2 class="font-bold mb-1">{{item.title}}</h2>
-                        <p class="text-[#999999] mb-2 text-xs">{{item.category}} </p>
-                        <p class="text-[#5CD0EB] font-semibold">$ {{item.price}}</p>
+                        <p class="text-[#999999] mb-2 text-xs">{{item.category.name}} </p>
+                        <p class="text-[#5FC3DF] font-semibold" :style="`color: ${color}`">$ {{item.price}}</p>
                     </div>
                 </a>
             </div>

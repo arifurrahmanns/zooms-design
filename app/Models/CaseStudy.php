@@ -13,9 +13,12 @@ class CaseStudy extends Model implements HasMedia
     use InteractsWithMedia;
 
     protected $fillable = [
+        'id',
         'title',
         'content',
         'is_visible',
         'author_name',
+        'slug',
+        'youtube',
     ];
 }

@@ -22,12 +22,14 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\BooleanColumn;
+use Illuminate\Support\Str;
 
 class ItemResource extends Resource
 {
     protected static ?string $model = Item::class;
 
     protected static ?string $navigationIcon = 'heroicon-s-document-text';
+    protected static ?string $navigationGroup = 'Items';
 
     public static function form(Form $form): Form
     {
@@ -39,13 +41,19 @@ class ItemResource extends Resource
                             ->schema([
                                 Card::make()
                                     ->schema([
-                                        TextInput::make('title')->required(),
+                                        TextInput::make('title')->required()
+                                            ->reactive()
+                                            ->afterStateUpdated(fn($state, callable $set) => $set('slug', Str::slug($state))),
+                                        TextInput::make('slug')->required(),
                                         TextInput::make('desc')->label('Description')->required(),
                                         Select::make('category_id')
                                             ->label('Category')
                                             ->required()
                                             ->options(DesignCategory::all()->pluck('name', 'id'))
                                             ->searchable(),
+                                        TextInput::make('contact_sale_url')
+                                            ->label('Url for contact sale')
+                                            ->placeholder('https://www.example.com'),
                                         SpatieMediaLibraryFileUpload::make('images')
                                             ->collection('images')
                                             ->multiple()
@@ -57,27 +65,46 @@ class ItemResource extends Resource
                                     ->schema([
                                         Placeholder::make('Plan Details'),
                                         Forms\Components\HasManyRepeater::make('plans')
-                                        ->relationship('plans')
-                                        ->schema([
-                                            TextInput::make('title'),
-                                            TextInput::make('sub_title'),
-                                            Textarea::make('desc')->label('Description')
-                                                ->default('Outlined, no backgrounds. One page with 1 frame of rough black and white sketch, not details.'),
-                                            Textarea::make('features')->label('Features (separate by new line)')
-                                                ->default("Source files provided\nJPG, PDF, PNG, Adobe Illustrator\n1 option design"),
-                                            TextInput::make('price')->label('Price $')
-                                                ->numeric(),
-                                            TextInput::make('link')->label('Order Link'),
-                                            TextInput::make('delivery_days')->label('Delivery Date')->default('3 Days Delivery'),
-                                            TextInput::make('revisions')->label('Revision')->default('Unlimited Revisions'),
-                                        ])
-                                        ->dehydrated()
-                                        ->defaultItems(1)
-                                        ->disableLabel()
-                                        ->columns([
-                                            // 'md' => 10,
-                                        ])
-                                        ->required(),
+                                            ->relationship('plans')
+                                            ->schema([
+                                                TextInput::make('title')->default('Basic')
+                                                    ->required(),
+                                                TextInput::make('sub_title')->default('Single Logo Design')
+                                                    ->required(),
+                                                Textarea::make('desc')->label('Description')
+                                                    ->required()
+                                                    ->default('Outlined, no backgrounds. One page with 1 frame of rough black and white sketch, not details.'),
+                                                Textarea::make('features')->label('Features (separate by new line)')
+                                                    ->required()
+                                                    ->default("Source files provided\nJPG, PDF, PNG, Adobe Illustrator\n1 option design"),
+                                                TextInput::make('price')->label('Price $')
+                                                    ->required()
+                                                    ->numeric()
+                                                    ->reactive()
+                                                    ->afterStateUpdated(fn($state, callable $set, callable $get) => $set('price_discount', $state - ($get('discount') / 100 * $state))),
+                                                TextInput::make('discount')->label('Discount %')
+                                                    ->numeric()
+                                                    ->reactive()
+                                                    ->afterStateUpdated(fn($state, callable $set, callable $get) => $set('price_discount', $get('price') - ($state / 100 * $get('price')))),
+                                                TextInput::make('price_discount')->label('Price after discount $')
+                                                    ->numeric(),
+                                                TextInput::make('link')->label('Order Link')
+                                                    ->required(),
+                                                TextInput::make('delivery_days')->label('Delivery Date')
+                                                    ->required()
+                                                    ->default('3 Days Delivery'),
+                                                TextInput::make('revisions')
+                                                    ->required()
+                                                    ->label('Revision')->default('Unlimited Revisions'),
+                                            ])
+                                            ->dehydrated()
+                                            ->defaultItems(1)
+                                            ->disableLabel()
+                                            ->columns([
+                                                // 'md' => 10,
+                                            ])
+                                            ->required()
+                                            ->grid(3),
                                 ]),
                         ]),
                         Grid::make()->columnSpan(2)
@@ -88,7 +115,11 @@ class ItemResource extends Resource
                                 Toggle::make('is_visible')
                                     ->default(true)
                                     ->label('Visible')
-                                    ->helperText('This will be hidden from viewer'),
+                                    ->helperText('This will be visible/hidden from viewer'),
+                                Toggle::make('is_popular')
+                                    ->default(false)
+                                    ->label('Popular Item')
+                                    ->helperText('This will be show in the popular section.'),
                             ]),
                             Forms\Components\Card::make()
                                 ->schema([
@@ -109,15 +140,22 @@ class ItemResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title'),
-                Tables\Columns\TextColumn::make('category.name'),
+                Tables\Columns\TextColumn::make('title')->searchable()->sortable(),
+                BooleanColumn::make('is_popular')->label('Popular')
+                    ->trueColor('success')
+                    ->falseColor('secondary')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('category.name')->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
+                    ->dateTime()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+                    ->dateTime()
+                    ->sortable(),
                 BooleanColumn::make('is_visible')->label('Visible')
                     ->trueColor('primary')
                     ->falseColor('warning')
+                    ->sortable()
             ])
             ->filters([
                 //

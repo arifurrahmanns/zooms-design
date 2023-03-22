@@ -1,9 +1,9 @@
 <template>
-	<DesignCategoryMenu/>
+	<!-- <DesignCategoryMenu/> -->
 	<Breadcrum :bgcolor="'#E0F9FF'" :breadcrumbs="[{ title: 'All Items' }]"/>
     <BrowseByCategory />
 	<div v-for="cat in store.categories">
-		<ListEachCategory :id="cat.id" :name="cat.name" :color="cat.color" :show-see-more-button="true" :items="allItems.filter(it => it.category_id == cat.id)"/>
+		<ListEachCategory :id="cat.id" :slug="cat.slug" :name="cat.name" :color="cat.color" :show-see-more-button="true" :items="allItems.filter(it => it.category_id == cat.id)"/>
 	</div>
 </template>
 

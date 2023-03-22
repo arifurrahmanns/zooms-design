@@ -1,6 +1,6 @@
 
 <template>
-    <div class="max-w-7xl mx-auto py-8 px-4">
+    <div class="mx-auto py-8 px-4 xl:px-16">
         <div class="mb-4 md:mb-6">
             <h2 class="font-bold md:text-xl" v-text="label || 'Case study'"></h2>
         </div>

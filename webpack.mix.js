@@ -16,6 +16,7 @@ mix.postCss('resources/css/filament.css', 'public/css', [
 ])
 
 mix.js('resources/js/app.js', 'public/js')
+    .version()
     .vue()
     .postCss("resources/css/app.css", "public/css", [
         require("tailwindcss"),

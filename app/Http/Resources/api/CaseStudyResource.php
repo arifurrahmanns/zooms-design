@@ -16,14 +16,19 @@ class CaseStudyResource extends JsonResource
      */
     public function toArray($request)
     {
+        $image = asset('images/placeholder.png');
+        try {
+            $image = $this->getMedia('thumbnail')[0]->getFullUrl();
+        } catch (\Throwable $th) {}
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'content' => $this->content,
+            'slug' => $this->slug,
+            // 'content' => $this->content,
             'desc' => Str::limit(strip_tags($this->content), 100),
             'author_name' => $this->author_name,
-            'created_at' => $this->created_at->format('Y-m-d'),
-            'thumbnail' => $this->getMedia('thumbnail')[0]->getFullUrl(),
+            'created_at' => $this->created_at->format('F d, Y'),
+            'thumbnail' => $image,
         ];
     }
 }

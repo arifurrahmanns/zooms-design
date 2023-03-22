@@ -18,5 +18,6 @@ class DesignCategory extends Model implements HasMedia
         'color',
         'bg_color',
         'is_visible',
+        'slug',
     ];
 }

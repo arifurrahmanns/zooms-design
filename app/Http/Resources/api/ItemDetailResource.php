@@ -24,12 +24,15 @@ class ItemDetailResource extends JsonResource
         return [
             'id' => $this->id,
             'category_id' => $this->category_id,
+            'category' => $this->category,
             'desc' => $this->desc,
+            'slug' => $this->slug,
             'created_at' => $this->created_at->format('Y-m-d'),
             'updated_at' => $this->updated_at->format('Y-m-d'),
             'images' => $images,
             'plans' => $this->plans,
             'title' => $this->title,
+            'contact_sale_url' => $this->contact_sale_url,
         ];
     }
 }

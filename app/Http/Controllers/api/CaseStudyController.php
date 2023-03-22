@@ -13,7 +13,8 @@ class CaseStudyController extends Controller
     public function listCaseStudies(Request $request)
     {
         $limit = $request->input('limit', 50);
-        $casStudies = CaseStudy::with(['media'])->where('is_visible', 1)
+        $casStudies = CaseStudy::with(['media'])
+            ->where('is_visible', 1)
             ->limit($limit)
             ->latest()
             ->get();
@@ -26,11 +27,12 @@ class CaseStudyController extends Controller
 
     public function caseStudyDetail(Request $request)
     {
-        $request->validate(['id' => 'required']);
-        $id = $request->id;
+        $request->validate(['slug' => 'required']);
+        $slug = $request->slug;
         $data = CaseStudy::with(['media'])
             ->where('is_visible', 1)
-            ->find($id);
+            ->where('slug', $slug)
+            ->first();
         return response()->json([
             'success' => 'success',
             'data' => CaseStudyDetailResource::make($data),

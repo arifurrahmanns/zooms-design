@@ -20,6 +20,7 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\BooleanColumn;
+use Illuminate\Support\Str;
 
 class PostResource extends Resource
 {
@@ -38,7 +39,13 @@ class PostResource extends Resource
                     ->schema([
                         Card::make()
                             ->schema([
-                                TextInput::make('title')->required(),
+                                TextInput::make('title')->required()
+                                    ->reactive()
+                                    ->afterStateUpdated(fn($state, callable $set) => $set('slug', Str::slug($state))),
+                                TextInput::make('slug')->required(),
+
+                                TextInput::make('youtube')->label('Youtube Link'),
+
                                 Select::make('category_id')
                                     ->label('Category')
                                     ->required()
@@ -86,14 +93,17 @@ class PostResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title'),
+                Tables\Columns\TextColumn::make('title')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
+                    ->dateTime()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+                    ->dateTime()
+                    ->sortable(),
                 BooleanColumn::make('is_visible')->label('Visible')
                     ->trueColor('primary')
                     ->falseColor('warning')
+                    ->sortable()
             ])
             ->filters([
                 //

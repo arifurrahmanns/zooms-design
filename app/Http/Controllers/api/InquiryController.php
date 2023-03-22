@@ -8,8 +8,6 @@ use Illuminate\Http\Request;
 
 class InquiryController extends Controller
 {
-
-
     public function inquiry(Request $request) {
         $request->validate([
             'email' => 'required|email',

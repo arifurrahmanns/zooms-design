@@ -15,6 +15,7 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'meta_description' => 'To make sure that all businesses can be accessible to great design by providing affordable, acceptable, and painless graphic design services.',
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -67,7 +68,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Phnom_Penh',
 
     /*
     |--------------------------------------------------------------------------

@@ -24,11 +24,10 @@ class ItemController extends Controller
 
     public function listItemByCategory(Request $request) {
         $request->validate([
-            'id' => 'required',
+            'slug' => 'required',
         ]);
-        $categoryId = $request->id;
-        $limit = $request->input('limit', 50);
-        $items = Item::withPlans($categoryId)
+        $limit = $request->input('limit', 100);
+        $items = Item::withPlans($request->slug)
                         ->limit($limit)
                         ->get();
         return response()->json([
@@ -40,10 +39,10 @@ class ItemController extends Controller
 
         $title = $request->title;
 
-        $categories = DesignCategory::where('is_visible', 1)->select('id')->get();
+        $categories = DesignCategory::where('is_visible', 1)->select('slug')->get();
         $result = collect();
         foreach ($categories as $category) {
-            $items = Item::withPlans($category->id);
+            $items = Item::withPlans($category->slug);
             if ($title) {
                 $items = $items
                     ->where(DB::raw('lower(title)'), 'like', '%' . strtolower($title) . '%')
@@ -78,8 +77,10 @@ class ItemController extends Controller
     }
 
     public function itemDetail(Request $request) {
-        $request->validate(['id' => 'required']);
-        $item = Item::with('plans', 'media')->find($request->id);
+        $request->validate(['slug' => 'required']);
+        $item = Item::with('plans', 'media', 'category')
+            ->where('slug', $request->slug)
+            ->first();
 
         return response()->json([
             'success' => 'success',

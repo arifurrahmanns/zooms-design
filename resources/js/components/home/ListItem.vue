@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-7xl mx-auto py-8 px-4">
+    <div class="mx-auto py-8 px-4 xl:px-16">
         <div class="flex justify-between items-center mb-4 md:mb-6">
             <h2 class="font-bold md:text-xl">Most Popular Items</h2>
             <a :href="`/designs`" class="flex space-x-3 items-center hover:animate-bounceX">
@@ -11,14 +11,14 @@
 				</svg>
             </a>
         </div>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 snap-x">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 snap-x">
             <div v-for="item in items" :key="item.id" class="snap-center">
-                <a :href="`/items/${item.id}`" class="border border-[#EBEBEB] rounded flex flex-col p-3 hover:shadow-lg hover:cursor-pointer">
-                    <img :src="item.media" :alt="item.title" class="mb-2">
+                <a :href="`/items/${item.slug}`" class="border border-[#EBEBEB] rounded flex flex-col p-3 hover:shadow-lg hover:cursor-pointer">
+                    <img :src="item.media" :alt="item.title" class="mb-2 aspect-[3/2]">
                     <div class="text-center text-sm">
                         <h2 class="font-bold mb-1">{{item.title}}</h2>
-                        <p class="text-[#999999] mb-2 text-xs">{{item.category}} </p>
-                        <p class="text-[#5CD0EB] font-semibold">$ {{item.price}}</p>
+                        <p class="text-[#999999] mb-2 text-xs">{{item.category.name}} </p>
+                        <p class="text-[#5FC3DF] font-semibold">$ {{item.price}}</p>
                     </div>
                 </a>
             </div>

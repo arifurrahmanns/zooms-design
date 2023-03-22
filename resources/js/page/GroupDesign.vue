@@ -21,22 +21,30 @@ export default {
             if (store.categories.length == 0) {
                 return {}
             }
-            return store.categories.find(it => it.id == this.$route.params.id)
+            return store.categories.find(it => it.slug == this.$route.params.slug)
         },
         activeCategory() {
             try {
-                const result = store.categories.find(it => it.id == this.$route.params.id) || {}
-                console.log(result)
+                const result = store.categories.find(it => it.slug == this.$route.params.slug) || {}
                 return result
             } catch (error) {
                 return { id: 0, color: '#E0F9FF'}
             }
         }
     },
-    async mounted() {
-        const data = await getListItemByCategory(this.$route.params.id, 50)
-        console.log(data)
+    methods: {
+        capitalize(word) {
+            return word.trim().toLowerCase().replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())));
+        }
+    },
+    async created() {
+        const data = await getListItemByCategory(this.$route.params.slug, 50)
         this.items = data.data
+        try {
+            document.title = this.capitalize(this.activeCategory.name)
+        } catch (error) {
+
+        }
     }
 }
 </script>
@@ -44,9 +52,11 @@ export default {
 <template>
 	<div v-if="items.length > 0">
         <DesignCategoryMenu/>
-        <Breadcrum :bgcolor="'#E0F9FF'" :breadcrumbs="[{ title: 'All Items' }, { title: activeCategory.name }]"/>
+        <Breadcrum :bgcolor="activeCategory.bg_color"
+            :breadcrumbs="[{ title: 'All Items' }, { title: activeCategory.name }]"
+            :description="activeCategory.desc"/>
 
-        <ListEachCategory :id="category.id" :name="category.name" :color="category.color" :items="items"/>
+        <ListEachCategory :id="category.id" :slug="category.slug" :name="category.name" :color="category.color" :items="items"/>
         <BrowseByCategory :active-category-id="activeCategory.id" />
     </div>
     <div v-else>

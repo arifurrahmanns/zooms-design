@@ -5,48 +5,50 @@ import Breadcrum from '../components/item/Breadcrum.vue';
 import { store } from '../store'
 import NotFoundVue from './NotFound.vue';
 import DesignCategoryMenu from '../components/common/DesignCategoryMenu.vue'
+import html2canvas from 'html2canvas'
 export default {
     name: "DesignItemDetail",
     components: { Breadcrum, NotFoundVue, DesignCategoryMenu },
     data() {
         return {
             images: [],
-            category_id: null,
+            category_slug: null,
             category: {},
             plans: [],
-            lists: [
-                { contend: "Source files provided" },
-                { contend: "JPG, PDF, PNG, Adobe Illustrator" },
-                { contend: "1 option design" },
-            ],
             openTab: 0,
             breadcrumbs : [],
             currentPlan: {
                 features: '',
             },
             relatedItems: [],
+            title: '',
+            contactSaleUrl: '',
+            screenshoting: false,
         };
     },
-    async mounted() {
+    async created() {
         try {
-            const data = (await getItemDetail(this.$route.params.id)).data
-            console.log(data)
+            const data = (await getItemDetail(this.$route.params.slug)).data
 
-            this.category_id = data.category_id
-            this.relatedItems = (await getListItemByCategory(this.category_id, 4)).data
-            this.relatedItems = this.relatedItems.filter(it => it.id != this.$route.params.id)
+            this.category_slug = data.category.slug
+            this.relatedItems = (await getListItemByCategory(this.category_slug, 4)).data
+            this.relatedItems = this.relatedItems.filter(it => it.slug != this.$route.params.slug)
             this.breadcrumbs = [
                 { title : "All Items", url: '/designs' },
-                { title : this.getCategory().name, url: `/categories/${data.category_id}` },
+                { title : this.getCategory().name, url: `/categories/${data.category.slug}` },
                 { title : data.title, url: '' },
             ]
+            document.title = data.title
+            this.title = data.title
             this.plans = data.plans
             this.currentPlan = this.plans[this.openTab]
-
+            this.contactSaleUrl = data.contact_sale_url
             this.images = data.images
         } catch (error) {
+            console.log(error)
             console.log('Item Detail Error')
         }
+
     },
     updated() {
         try {
@@ -62,11 +64,10 @@ export default {
         },
         getCategory() {
             if (this.category.id != null) return this.category;
-            this.category = store.categories.find(it => it.id == this.category_id) || {}
+            this.category = store.categories.find(it => it.slug == this.category_slug) || {}
             return this.category;
         },
         initSlider() {
-            console.log('test')
             $('.slider-single').slick({
                 slidesToShow: 1,
                 slidesToScroll: 1,
@@ -105,14 +106,30 @@ export default {
                 $('.slider-single').slick('slickGoTo', goToSingleSlide);
             });
         },
+        async order(item) {
+            this.screenshoting = true
+            this.$root.$refs.modalOrder.show()
+            await new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve()
+                }, 100);
+            })
+            html2canvas(document.querySelector('#item-detail')).then((canvas) => {
+                this.screenshoting = false
+                this.$root.$refs.modalOrder.product = `${this.title} (${item.title})`
+                this.$root.$refs.modalOrder.image = canvas.toDataURL();
+                this.$root.$refs.modalOrder.show()
+            });
+        },
     },
 }
 </script>
 <template>
 	<div v-if="plans.length > 0">
         <design-category-menu/>
-        <Breadcrum :bgcolor="'#FFEAF4'" :breadcrumbs="breadcrumbs"/>
-        <div class="max-w-7xl mx-auto px-4 mt-14">
+        <Breadcrum :bgcolor="getCategory().bg_color" :breadcrumbs="breadcrumbs"
+            :description="getCategory().desc"/>
+        <div class="mx-auto px-4 mt-14 xl:px-16">
             <div class="grid gap-4 grid-cols-1 lg:grid-cols-2">
                 <div class="mb-12 md:mb-20 lg:mb-0">
                     <div class="slider slider-single mb-3">
@@ -127,45 +144,53 @@ export default {
                     </div>
                 </div>
                 <div class="lg:pl-6">
-                    <ul class="grid grid-cols-3 mb-0 list-none border-b-0 border-[1px] border-[#DADBDD]">
-                        <li v-for="(plan, index) in plans" :key="plan.id" class="flex-auto text-center">
-                            <a class="font-bold active:text-white hover:text-[#5CD0EB] px-5 block py-3 cursor-pointer" @click="toggleTabs(index)" v-bind:class="{'text-[#A1A6BF] bg-[#FAFAFA]': openTab !== index, 'text-white bg-[#FC666F]': openTab === index}">
-                                {{ plan.title }}
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="bg-white border-[1px] border-[#DADBDD]">
-                        <div class="px-6 lg:p-8 py-10 flex-auto">
-                            <div class="tab-content tab-space">
-                                <div>
-                                    <div class="flex justify-between items-center mb-4">
-                                        <h4 class="text-[#404145] font-bold text-lg" v-text="currentPlan.sub_title"></h4>
-                                        <span class="text-lg text-[#FC666F] font-bold" v-text="`$ ${currentPlan.price}`"></span>
-                                    </div>
-                                    <p class="text-[#62646A] mb-10" v-text="currentPlan.desc"></p>
-                                    <div class="grid grid-cols-1 md:grid-cols-2 text-[#2B2F42] font-bold mb-9">
-                                        <div class="flex items-center mb-3 md:mb-0">
-                                            <img src="/images/item/time-icon.png" class="w-5 xl:w-7 mr-3.5">
-                                            <p class="" v-text="currentPlan.delivery_days"></p>
+                    <div id="item-detail">
+                        <ul class="grid grid-cols-3 mb-0 list-none border-b-0 border-[1px] border-[#DADBDD]">
+                            <li v-for="(plan, index) in plans" :key="plan.id" class="flex-auto text-center">
+                                <a class="font-bold text-white px-5 block py-3 cursor-pointer hover:opacity-80"
+                                    :style="openTab === index ? `background-color: ${getCategory().color};`: `background-color: #FAFAFA;color:#A1A6BF;`"
+                                    @click="toggleTabs(index)">
+                                    {{ plan.title }}
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="bg-white border-[1px] border-[#DADBDD]">
+                            <div class="px-6 lg:p-8 py-10 flex-auto">
+                                <div class="tab-content tab-space">
+                                    <div>
+                                        <div class="flex justify-between items-center mb-4">
+                                            <h4 class="text-[#404145] font-bold text-lg" v-text="currentPlan.sub_title"></h4>
+                                            <span class="text-lg font-bold" :style="`color: ${getCategory().color}`" v-text="`$ ${currentPlan.price}`"></span>
                                         </div>
-                                        <div class="flex items-center">
-                                            <img src="/images/item/refresh-icon.png" class="w-5 xl:w-7 mr-3.5">
-                                            <p class="" v-text="currentPlan.revisions"></p>
+                                        <p class="text-[#62646A] mb-10" v-text="currentPlan.desc"></p>
+                                        <div class="grid grid-cols-1 md:grid-cols-2 text-[#2B2F42] font-bold mb-9">
+                                            <div class="flex items-center mb-3 md:mb-0">
+                                                <img src="/images/item/time-icon.png" class="w-5 xl:w-7 mr-3.5">
+                                                <p class="" v-text="currentPlan.delivery_days"></p>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <img src="/images/item/refresh-icon.png" class="w-5 xl:w-7 mr-3.5">
+                                                <p class="" v-text="currentPlan.revisions"></p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <ul class="text-[#2B2F42] mb-6">
-                                        <li v-for="feature in currentPlan.features.split('\n')" class="flex items-center mb-4 last:mb-0">
-                                            <img src="/images/item/check-icon.png" class="w-4 mr-3 lg:mr-6">
-                                            <span v-text="feature"></span>
-                                        </li>
-                                    </ul>
-                                    <div class="md:flex justify-between text-xs mb-2">
-                                        <p class="text-[#959597] mb-3 md:mb-0">Price in US dollars, excludes local tax.</p>
-                                        <p class="text-[#959597]">T&C Applied</p>
-                                    </div>
-                                    <div class="grid md:grid-cols-2 lg:grid-cols-1 gap-4">
-                                        <a :href="currentPlan.link" class="text-center text-white font-bold bg-[#FC666F] hover:bg-[#e8787e] p-2 rounded">Order</a>
-                                        <a href="#" class="block text-center text-[#FC666F] font-bold bg-[#FFE9EA] hover:bg-[#f3d3d3] p-2 rounded">Contact Sale</a>
+                                        <ul class="text-[#2B2F42] mb-6">
+                                            <li v-for="feature in currentPlan.features.split('\n')" class="flex items-center mb-4 last:mb-0">
+                                                <img v-if="feature != ''" src="/images/item/check-icon.png" class="w-4 mr-3 lg:mr-6">
+                                                <span v-text="feature"></span>
+                                            </li>
+                                        </ul>
+                                        <div class="md:flex justify-between text-xs mb-2">
+                                            <p class="text-[#959597] mb-3 md:mb-0">Price in US dollars, excludes local tax.</p>
+                                            <p class="text-[#959597]">T&C Applied</p>
+                                        </div>
+                                        <div v-if="!screenshoting" class="grid md:grid-cols-2 lg:grid-cols-1 gap-4">
+                                            <button @click="order(currentPlan)"
+                                                :style="`background-color: ${getCategory().color}`"
+                                                class="text-center text-white font-bold py-3 rounded hover:opacity-80">Order</button>
+                                            <a :href="contactSaleUrl"
+                                                :style="`color: ${getCategory().color}; background-color: ${getCategory().bg_color}`"
+                                                class="block text-center font-bold py-3 rounded hover:opacity-80">Contact Sale</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -174,10 +199,10 @@ export default {
                 </div>
             </div>
         </div>
-        <div v-if="relatedItems.length > 0" class="max-w-7xl mx-auto py-8 px-4">
+        <div v-if="relatedItems.length > 0" class="mx-auto py-8 px-4 xl:px-16">
             <div class="flex justify-between items-center mb-4 md:mb-6">
                 <h2 class="font-semibold md:text-xl capitalize" :style="`color: ${category.color}`">{{ category.name }} </h2>
-                <a :href="`/categories/${category.id}`" class="flex space-x-3 items-center hover:animate-bounceX">
+                <a :href="`/categories/${category.slug}`" class="flex space-x-3 items-center hover:animate-bounceX">
                     <span class="font-semibold md:text-xl" :style="`color: ${category.color}`">
                         See more
                     </span>
@@ -188,12 +213,12 @@ export default {
             </div>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-8 snap-x">
                 <div v-for="item in relatedItems" :key="item.id" class="snap-center">
-                    <a :href="`/items/${item.id}`" class="border border-[#EBEBEB] rounded flex flex-col p-3 hover:shadow-lg hover:cursor-pointer">
+                    <a :href="`/items/${item.slug}`" class="border border-[#EBEBEB] rounded flex flex-col p-3 hover:shadow-lg hover:cursor-pointer">
                         <img :src="item.media" :alt="item.title" class="mb-2">
                         <div class="text-center text-sm">
                             <h2 class="font-bold mb-1">{{item.title}}</h2>
-                            <p class="text-[#999999] mb-2 text-xs">{{item.category}} </p>
-                            <p class="text-[#5CD0EB] font-semibold">$ {{item.price}}</p>
+                            <p class="text-[#999999] mb-2 text-xs">{{item.category.name}} </p>
+                            <p class="font-semibold" :style="`color: ${category.color}`">$ {{item.price}}</p>
                         </div>
                     </a>
                 </div>

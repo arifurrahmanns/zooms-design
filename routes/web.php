@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\SEOController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/case-studies/{slug}', [SEOController::class, 'caseStudy']);
+Route::get('/post/{slug}', [SEOController::class, 'post']);
+
+
+Route::get("/price", [FrontendController::class, 'price']);
 Route::get('/{vue_capture?}', function () {
     return view('index');
 })->where('vue_capture', '[\/\w\.-]*');

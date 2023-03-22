@@ -14,6 +14,8 @@ class ItemPlan extends Model
         'sub_title',
         'desc',
         'price',
+        'discount',
+        'price_discount',
         'link',
 
         'features',

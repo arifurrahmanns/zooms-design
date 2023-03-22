@@ -71,7 +71,7 @@ defineExpose({show, hide})
                             <input type="email" v-model="email" placeholder="E-mail" class="border-0 border-b-2 pl-0 px-4 py-2 focus:ring-0">
                             <textarea v-model="msg" placeholder="Message" class="border-0 border-b-2 pl-0 px-4 py-2 focus:ring-0"></textarea>
                             <div>
-                                <button @click="request" class="rounded-full bg-[#5CD0EB] px-4 py-2 text-white font-semibold focus:bg-[#2e8b9f]">Contact Us</button>
+                                <button @click="request" class="rounded-full bg-[#5FC3DF] px-4 py-2 text-white font-semibold focus:bg-[#2e8b9f]">Contact Us</button>
                             </div>
                         </div>
                         <div class="flex flex-col space-y-5 w-[15rem]">

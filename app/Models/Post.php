@@ -19,6 +19,8 @@ class Post extends Model implements HasMedia
         'is_visible',
         'category_id',
         'author_id',
+        'slug',
+        'youtube',
     ];
 
     public function category() {

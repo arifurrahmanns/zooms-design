@@ -14,6 +14,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Illuminate\Support\Str;
 
 class PostCategoryResource extends Resource
 {
@@ -31,7 +32,10 @@ class PostCategoryResource extends Resource
                     ->schema([
                         Card::make()->columnSpan(4)
                             ->schema([
-                                TextInput::make('name')->required(),
+                                TextInput::make('name')->required()
+                                    ->reactive()
+                                    ->afterStateUpdated(fn($state, callable $set) => $set('slug', Str::slug($state))),
+                                TextInput::make('slug')->required(),
                                 TextInput::make('desc')->label('Description')->required(),
                             ]),
                         Grid::make()->columnSpan(2)

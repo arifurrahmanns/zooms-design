@@ -7,6 +7,7 @@ use App\Models\CaseStudy;
 use Filament\Forms;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
@@ -17,12 +18,14 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\BooleanColumn;
+use Illuminate\Support\Str;
 
 class CaseStudyResource extends Resource
 {
     protected static ?string $model = CaseStudy::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
+    protected static ?string $navigationGroup = 'Items';
 
     public static function form(Form $form): Form
     {
@@ -33,13 +36,18 @@ class CaseStudyResource extends Resource
                     ->schema([
                         Card::make()
                             ->schema([
-                                TextInput::make('title')->required(),
+                                TextInput::make('title')
+                                    ->required()
+                                    ->reactive()
+                                    ->afterStateUpdated(fn($state, callable $set) => $set('slug', Str::slug($state))),
+                                TextInput::make('slug')->required(),
+                                TextInput::make('youtube')->label('Youtube Link'),
                                 RichEditor::make('content'),
                                 SpatieMediaLibraryFileUpload::make('thumbnail')
                                     ->collection('thumbnail')
                                     ->multiple()
                                     ->enableReordering(),
-                                TextInput::make('author_name')->placeholder('Name of the author'),
+                                TextInput::make('author_name')->placeholder('Name of the author')->default('admin'),
                                 SpatieMediaLibraryFileUpload::make('author_image')
                                     ->multiple(false)
                                     ->collection('author_image'),
@@ -74,14 +82,17 @@ class CaseStudyResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title'),
+                Tables\Columns\TextColumn::make('title')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
+                    ->dateTime()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+                    ->dateTime()
+                    ->sortable(),
                 BooleanColumn::make('is_visible')->label('Visible')
                     ->trueColor('primary')
                     ->falseColor('warning')
+                    ->sortable()
             ])
             ->filters([
                 //

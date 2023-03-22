@@ -26,7 +26,7 @@ class ContactUsResource extends Resource
     protected static ?string $navigationLabel = 'Inquiries Request';
     protected static ?string $label = 'Inquiries Request';
     protected static ?string $navigationGroup = 'Contact';
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-chat-alt-2';
 
     public static function form(Form $form): Form
     {
@@ -82,7 +82,7 @@ class ContactUsResource extends Resource
             ->filters([
                 //
             ])
-            ->defaultSort('status');;
+            ->defaultSort('status');
     }
 
     public static function getRelations(): array

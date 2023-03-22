@@ -1,21 +1,11 @@
-<script setup>
-
-
-</script>
 <script>
+import { getFaqs } from '../../api/api'
 export default {
+    props: ['page'],
     data() {
         return {
-            question_l: [
-                { id: 1, q: 'What is Envato Elements?', show_answer: false, answer: 'Envato Elements is an unlimited subscription service for digital assets, tailored to the needs of agencies, designers, marketers and other professionals who need items on a frequent or high-volume basis.' },
-                { id: 2, q: 'How does licensing on Envato Elements work?' , show_answer: false, answer: `It's a single use license. Each time you download and register an item, you get a license for a single use of that item. And if you want to use an item on future projects, simply register it again for each end-use. We make it easy for you to tell us what it's being used for.` },
-                { id: 3, q: 'Does Envato Elements have the same items as Envato Market?', show_answer: false, answer: 'No. Although Envato Elements and Envato Market stock similar content, some items are exclusive to either platform. So, some items are on both, some are only available on Envato Elements, others are only available on Envato Market.' },
-            ],
-            question_r: [
-                { id: 4, q: 'What is Envato Elements?', show_answer: false, answer: 'Envato Elements is an unlimited subscription service for digital assets, tailored to the needs of agencies, designers, marketers and other professionals who need items on a frequent or high-volume basis.' },
-                { id: 5, q: 'How does licensing on Envato Elements work?' , show_answer: false, answer: `It's a single use license. Each time you download and register an item, you get a license for a single use of that item. And if you want to use an item on future projects, simply register it again for each end-use. We make it easy for you to tell us what it's being used for.` },
-                { id: 6, q: 'Does Envato Elements have the same items as Envato Market?', show_answer: false, answer: 'No. Although Envato Elements and Envato Market stock similar content, some items are exclusive to either platform. So, some items are on both, some are only available on Envato Elements, others are only available on Envato Market.' },
-            ]
+            question_l: [],
+            question_r: [],
         }
     },
     methods: {
@@ -34,13 +24,52 @@ export default {
                     break;
                 }
             }
+        },
+        async fetchFaq() {
+            console.log(this.page)
+            const faqs = (await getFaqs({
+                page: this.page
+            })).data
+            const faql = [];
+            const faqr = [];
+            faqs.forEach((faq, i) => {
+                if (i < (faqs.length / 2)) {
+                    faql.push(faq)
+                } else {
+                    faqr.push(faq)
+                }
+            });
+            this.question_l = faql.map(it => {
+                return {
+                    id: it.id,
+                    q: it.question,
+                    answer: it.answer,
+                    show_answer: false,
+                }
+            });
+            this.question_r = faqr.map(it => {
+                return {
+                    id: it.id,
+                    q: it.question,
+                    answer: it.answer,
+                    show_answer: false,
+                }
+            });
         }
-    }
+    },
+    watch: {
+        async page() {
+
+        }
+    },
+    async created() {
+        await this.fetchFaq()
+    },
 }
 </script>
 
 <template>
-    <div class="max-w-7xl mx-auto py-8 px-8">
+    <div class="mx-auto py-8 px-4 xl:px-16">
         <div class="text-xl font-bold mb-8">Have question?</div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12">
             <div>

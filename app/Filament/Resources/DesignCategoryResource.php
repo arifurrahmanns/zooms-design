@@ -14,17 +14,20 @@ use App\Filament\Resources\DesignCategoryResource\Pages;
 use App\Tables\Columns\Color;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\ColorPicker;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Toggle;
 use Filament\Tables\Columns\BooleanColumn;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+use Illuminate\Support\Str;
 
 class DesignCategoryResource extends Resource
 {
     protected static ?string $model = DesignCategory::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-puzzle';
+    protected static ?string $navigationGroup = 'Items';
 
     public static function form(Form $form): Form
     {
@@ -34,13 +37,16 @@ class DesignCategoryResource extends Resource
                     ->schema([
                         Card::make()->columnSpan(4)
                             ->schema([
-                                TextInput::make('name')->required(),
+                                TextInput::make('name')->required()
+                                    ->reactive()
+                                    ->afterStateUpdated(fn($state, callable $set) => $set('slug', Str::slug($state))),
+                                TextInput::make('slug')->required(),
                                 TextInput::make('desc')->label('Description')->required(),
                                 ColorPicker::make('color')->required(),
-                                ColorPicker::make('bg_color')->required()->label('Background Color'),
+                                // ColorPicker::make('bg_color')->required()->label('Background Color'),
+                                Hidden::make('bg_color')->default(''),
                                 SpatieMediaLibraryFileUpload::make('image')
                                     ->collection('image')
-                                    ->required()
                                     ->imagePreviewHeight('200')
                                     ->panelLayout('compact')
                                     ->maxSize(1024)
