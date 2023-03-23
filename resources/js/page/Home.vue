@@ -186,8 +186,8 @@ export default {
                 </div>
             </div>
             <div class="absolute top-[25%] left-[10%] md:space-y-3 w-[40%] md:w-[25%]">
-                <h1 class="md:text-4xl font-bold">{{ store.home_title.text1 }}</h1>
-                <div class="md:text-4xl font-bold"> {{titleBanner }}<span :class="{'opacity-0': bling, }" class="transition-all duration-300 ease-in-out">_</span></div>
+                <h1 class="font-bold md:text-4xl">{{ store.home_title.text1 }}</h1>
+                <div class="font-bold md:text-4xl"> {{titleBanner }}<span :class="{'opacity-0': bling, }" class="transition-all duration-300 ease-in-out">_</span></div>
                 <form @submit.prevent="searchDesign" ref="formSearch" class="relative mt-2">
                     <input type="text" autocomplete="off" v-model="search" class="border-0 bg-white rounded-md px-2 py-1 md:p-5 w-full text-[15px] md:text-base focus:ring-[#5FC3DF]" placeholder="Search">
                     <button type="submit" class="absolute w-6 h-6 top-1 md:w-8 md:h-8 right-1 md:top-4 md:right-3">
@@ -200,13 +200,13 @@ export default {
     <div class="py-8"></div>
     <TrustedBrand/>
     <div class="py-8"></div>
-    <div class="mx-auto py-8 px-4 xl:px-16">
-        <h2 class="font-bold mb-4 md:mb-6 md:text-xl">Categories</h2>
-        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-8">
+    <div class="px-4 py-8 mx-auto xl:px-16">
+        <h2 class="mb-4 font-bold md:mb-6 md:text-xl">Categories</h2>
+        <div class="grid grid-cols-2 gap-4 md:grid-cols-5 md:gap-8">
             <div v-for="cat in store.categories" :key="cat.name">
-                <a :href="`/categories/${cat.slug}`" :style="`background-color: ${cat.bg_color}`" class="rounded aspect-square flex justify-center items-center flex-col space-y-2 hover:shadow-lg">
+                <a :href="`/categories/${cat.slug}`" :style="`background-color: ${cat.bg_color}`" class="flex flex-col items-center justify-center space-y-2 rounded aspect-square hover:shadow-lg">
                     <img :src="cat.image" :alt="cat.name" class="max-w-[60px]">
-                    <div class="font-bold capitalize text-center">
+                    <div class="font-bold text-center capitalize">
                         {{ cat.name }}
                     </div>
                 </a>
@@ -219,13 +219,13 @@ export default {
     <ServiceBundle />
     <div class="py-4"></div>
 
-    <div class="mx-auto py-8 px-4 xl:px-16">
+    <div class="px-4 py-8 mx-auto xl:px-16">
         <div class="grid grid-cols-2 md:grid-cols-3 bg-[#2B2F42] rounded-lg px-4 sm:px-16">
-            <div class="flex py-4 sm:py-12 space-x-4 items-start justify-start sm:justify-center" v-for="(flow, index) in flows" :key="index">
+            <div class="flex items-start justify-start py-4 space-x-4 sm:py-12 sm:justify-center" v-for="(flow, index) in flows" :key="index">
                 <div class="text-[#5FC3DF] text-5xl font-bold">{{index + 1}}</div>
                 <div >
-                    <div class="text-white font-bold mb-1">{{flow.name}}</div>
-                    <div class="text-white/75 text-sm font-light" v-html="flow.desc">
+                    <div class="mb-1 font-bold text-white">{{flow.name}}</div>
+                    <div class="text-sm font-light text-white/75" v-html="flow.desc">
                     </div>
                 </div>
             </div>
@@ -236,8 +236,8 @@ export default {
     <Discount :items="promos" :timeLefts="timeLefts"/>
     <div class="py-8"></div>
 
-    <div class="mx-auto py-8 px-4 xl:px-16">
-        <div class="flex justify-between items-center mb-4 md:mb-6">
+    <div class="px-4 py-8 mx-auto xl:px-16">
+        <div class="flex items-center justify-between mb-4 md:mb-6">
             <h2 class="font-bold md:text-xl">Why people love zooms design</h2>
             <div class="flex space-x-2">
                 <button class="testi-pp2">
@@ -254,7 +254,7 @@ export default {
         </div>
         <div class="slider slider-testi">
             <div v-for="(testi, index) in testimonail" :key="index" class="px-2">
-                <div class="border rounded-lg flex space-x-4 px-8 py-12">
+                <div class="flex px-8 py-12 space-x-4 border rounded-lg">
                     <img :src="testi.image" alt="" class="w-[75px] h-[75px] rounded-full">
                     <div class="space-y-2">
                         <h2 class="font-bold">{{ testi.name }}</h2>
@@ -266,18 +266,18 @@ export default {
     </div>
     <div class="py-8"></div>
 
-    <div class="mx-auto py-8 px-4 xl:px-16">
-        <h2 class="font-bold mb-4 md:text-xl">We design with your favourite applications</h2>
+    <div class="px-4 py-8 mx-auto xl:px-16">
+        <h2 class="mb-4 font-bold md:text-xl">We design with your favourite applications</h2>
         <div class="">
-            <div class="lg:flex justify-between overflow-scroll grid grid-cols-3 md:grid-cols-5 gap-3 scrollbar-hide">
-                <div class="flex justify-center items-center"><img src="/images/application/canva.png" class="max-w-[100px] sm:max-w-[144px]"></div>
-                <div class="flex justify-center items-center"><img src="/images/application/ps.png" class="max-w-[100px] sm:max-w-[144px]"></div>
-                <div class="flex justify-center items-center"><img src="/images/application/ai.png" class="max-w-[100px] sm:max-w-[144px]"></div>
-                <div class="flex justify-center items-center"><img src="/images/application/id.png" class="max-w-[100px] sm:max-w-[144px]"></div>
-                <div class="flex justify-center items-center"><img src="/images/application/ae.png" class="max-w-[100px] sm:max-w-[144px]"></div>
-                <div class="flex justify-center items-center"><img src="/images/application/pwp.png" class="max-w-[100px] sm:max-w-[144px]"></div>
-                <div class="flex justify-center items-center"><img src="/images/application/page.png" class="max-w-[100px] sm:max-w-[144px]"></div>
-                <div class="flex justify-center items-center"><img src="/images/application/figma.png" class="max-w-[100px] sm:max-w-[144px]"></div>
+            <div class="grid justify-between grid-cols-3 gap-3 overflow-auto lg:flex md:grid-cols-5 scrollbar-hide">
+                <div class="flex items-center justify-center"><img src="/images/application/canva.png" class="max-w-[100px] sm:max-w-[144px]"></div>
+                <div class="flex items-center justify-center"><img src="/images/application/ps.png" class="max-w-[100px] sm:max-w-[144px]"></div>
+                <div class="flex items-center justify-center"><img src="/images/application/ai.png" class="max-w-[100px] sm:max-w-[144px]"></div>
+                <div class="flex items-center justify-center"><img src="/images/application/id.png" class="max-w-[100px] sm:max-w-[144px]"></div>
+                <div class="flex items-center justify-center"><img src="/images/application/ae.png" class="max-w-[100px] sm:max-w-[144px]"></div>
+                <div class="flex items-center justify-center"><img src="/images/application/pwp.png" class="max-w-[100px] sm:max-w-[144px]"></div>
+                <div class="flex items-center justify-center"><img src="/images/application/page.png" class="max-w-[100px] sm:max-w-[144px]"></div>
+                <div class="flex items-center justify-center"><img src="/images/application/figma.png" class="max-w-[100px] sm:max-w-[144px]"></div>
             </div>
         </div>
     </div>

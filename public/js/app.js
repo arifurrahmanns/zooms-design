@@ -22437,10 +22437,267 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_common_TrustedBrand_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/common/TrustedBrand.vue */ "./resources/js/components/common/TrustedBrand.vue");
 /* harmony import */ var _components_common_HaveQuestion_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/common/HaveQuestion.vue */ "./resources/js/components/common/HaveQuestion.vue");
 /* harmony import */ var _components_common_DesignCategoryMenu_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/common/DesignCategoryMenu.vue */ "./resources/js/components/common/DesignCategoryMenu.vue");
+var __default__ = {
+  created: function created() {},
+  methods: {
+    openTab: function openTab(evt, cityName) {
+      // Declare all variables
+      var i, tabcontent, tablinks; // Get all elements with class="tabcontent" and hide them
+
+      tabcontent = document.getElementsByClassName("tabcontent");
+
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].classList.remove("active");
+      } // Get all elements with class="tablinks" and remove the class "active"
+
+
+      tablinks = document.getElementsByClassName("tablinks");
+
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      } // Show the current tab, and add an "active" class to the button that opened the tab
+
+
+      document.getElementById(cityName).classList.add("active");
+      evt.currentTarget.className += " active";
+    },
+    initSlider: function initSlider() {
+      $('.heroSlider').slick({
+        dots: false,
+        infinite: false,
+        speed: 300,
+        slidesToShow: 2,
+        slidesToScroll: 2,
+        arrows: false,
+        autoplay: false,
+        // fade: true,
+        autoplaySpeed: 2000,
+        // variableWidth: true,
+        responsive: [{
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        } // You can unslick at a given breakpoint now by adding:
+        // settings: "unslick"
+        // instead of a settings object
+        ]
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.initSlider();
+
+    var formatNumber = function formatNumber(number) {
+      return new Intl.NumberFormat().format(number);
+    }; // plan 1
+
+
+    var f1 = [{
+      credit: 25,
+      duration: "1 year",
+      price: 750
+    }, {
+      credit: 35,
+      duration: "1 year",
+      price: 875
+    }, {
+      credit: 45,
+      duration: "1 year",
+      price: 900
+    }];
+    document.querySelectorAll(".plan1 .priceSelect button").forEach(function (e) {
+      e.addEventListener("click", function () {
+        document.querySelectorAll(".plan1 .priceSelect button").forEach(function (e) {
+          e.classList.remove("active");
+        });
+        this.classList.add("active");
+        var val = this.getAttribute("value");
+        var current = f1.find(function (f) {
+          return f.credit == parseInt(val);
+        });
+
+        if (current) {
+          document.querySelector('.plan1 .price span').textContent = formatNumber(current.price);
+          document.querySelector(".plan1 .crdtCunt").textContent = current.credit;
+          document.querySelector(".plan1 .durationCunt").textContent = current.duration;
+        }
+      });
+    }); // plan 3
+
+    var f3 = [{
+      credit: 1,
+      duration: "1 month",
+      price: 450
+    }, {
+      credit: 2,
+      duration: "1 month",
+      price: 850
+    }, {
+      credit: 3,
+      duration: "1 month",
+      price: 1250
+    }, {
+      credit: 4,
+      duration: "1 month",
+      price: 1650
+    }];
+    document.querySelectorAll(".plan3 .priceSelect button").forEach(function (e) {
+      e.addEventListener("click", function () {
+        document.querySelectorAll(".plan3 .priceSelect button").forEach(function (e) {
+          e.classList.remove("active");
+        });
+        this.classList.add("active");
+        var val = this.getAttribute("value");
+        var current = f3.find(function (f) {
+          return f.credit == parseInt(val);
+        });
+
+        if (current) {
+          document.querySelector('.plan3 .price span').textContent = formatNumber(current.price);
+          document.querySelector(".plan3 .crdtCunt").textContent = current.credit;
+          document.querySelector(".plan3 .durationCunt").textContent = current.duration;
+        }
+      });
+    });
+    var f2 = [{
+      agreement: 1,
+      packs: [{
+        credit: 5,
+        duration: "1 month",
+        price: 250
+      }, {
+        credit: 10,
+        duration: "1 month",
+        price: 450
+      }, {
+        credit: 15,
+        duration: "1 month",
+        price: 600
+      }, {
+        credit: 25,
+        duration: "1 month",
+        price: 875
+      }, {
+        credit: 30,
+        duration: "1 month",
+        price: 900
+      }]
+    }, {
+      agreement: 3,
+      packs: [{
+        credit: 5,
+        duration: "3 month",
+        price: 225
+      }, {
+        credit: 10,
+        duration: "3 month",
+        price: 405
+      }, {
+        credit: 15,
+        duration: "3 month",
+        price: 540
+      }, {
+        credit: 25,
+        duration: "3 month",
+        price: 787
+      }, {
+        credit: 30,
+        duration: "3 month",
+        price: 810
+      }]
+    }, {
+      agreement: 6,
+      packs: [{
+        credit: 5,
+        duration: "6 month",
+        price: 200
+      }, {
+        credit: 10,
+        duration: "6 month",
+        price: 360
+      }, {
+        credit: 15,
+        duration: "6 month",
+        price: 480
+      }, {
+        credit: 25,
+        duration: "6 month",
+        price: 700
+      }, {
+        credit: 30,
+        duration: "6 month",
+        price: 720
+      }]
+    }, {
+      agreement: 12,
+      packs: [{
+        credit: 5,
+        duration: "12 month",
+        price: 175
+      }, {
+        credit: 10,
+        duration: "12 month",
+        price: 315
+      }, {
+        credit: 15,
+        duration: "12 month",
+        price: 420
+      }, {
+        credit: 25,
+        duration: "12 month",
+        price: 612
+      }, {
+        credit: 30,
+        duration: "12 month",
+        price: 630
+      }]
+    }];
+    document.querySelectorAll(".plan2 .priceSelect button").forEach(function (e) {
+      e.addEventListener("click", function () {
+        document.querySelectorAll(".plan2 .priceSelect button").forEach(function (e) {
+          e.classList.remove("active");
+        });
+        this.classList.add("active");
+        var val = this.getAttribute("value");
+        var slectedAgreement = $(".selectAgree").val();
+        var currentAgrement = f2.find(function (f) {
+          return f.agreement == parseInt(slectedAgreement);
+        });
+        var current = currentAgrement.packs.find(function (f) {
+          return f.credit === parseInt(val);
+        });
+
+        if (current) {
+          document.querySelector('.plan2 .price span').textContent = formatNumber(current.price);
+          document.querySelector(".plan2 .crdtCunt").textContent = current.credit;
+          document.querySelector(".plan2 .durationCunt").textContent = current.duration;
+        }
+      });
+    });
+    $(".plan2 .selectAgree").change(function () {
+      var slectedAgreement = $(this).val();
+      var val = $(".plan2 .priceSelect button.active").attr("value");
+      var currentAgrement = f2.find(function (f) {
+        return f.agreement == parseInt(slectedAgreement);
+      });
+      var current = currentAgrement.packs.find(function (f) {
+        return f.credit === parseInt(val);
+      });
+
+      if (current) {
+        document.querySelector('.plan2 .price span').textContent = formatNumber(current.price);
+        document.querySelector(".plan2 .crdtCunt").textContent = current.credit;
+        document.querySelector(".plan2 .durationCunt").textContent = current.duration;
+      }
+    });
+  }
+};
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (/*#__PURE__*/Object.assign(__default__, {
   name: 'Pricing',
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
@@ -22456,7 +22713,7 @@ __webpack_require__.r(__webpack_exports__);
     });
     return __returned__;
   }
-});
+}));
 
 /***/ }),
 
@@ -24106,11 +24363,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "mx-auto py-8 px-4 xl:px-16"
+  "class": "px-4 py-8 mx-auto xl:px-16"
 };
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
-  "class": "text-center font-bold mb-4 md:text-xl"
+  "class": "mb-4 font-bold text-center md:text-xl"
 }, "Trusted by global brands", -1
 /* HOISTED */
 );
@@ -24119,13 +24376,13 @@ var _hoisted_3 = {
   "class": ""
 };
 var _hoisted_4 = {
-  "class": "md:flex justify-between overflow-scroll grid grid-cols-3 gap-3 scrollbar-hide"
+  "class": "grid justify-between grid-cols-3 gap-3 overflow-auto md:flex scrollbar-hide"
 };
 var _hoisted_5 = ["src", "alt"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.store.trustedBrands, function (trusted) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-      "class": "flex justify-center items-center",
+      "class": "flex items-center justify-center",
       key: trusted.id
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       src: trusted.image,
@@ -25546,10 +25803,10 @@ var _hoisted_5 = {
   "class": "absolute top-[25%] left-[10%] md:space-y-3 w-[40%] md:w-[25%]"
 };
 var _hoisted_6 = {
-  "class": "md:text-4xl font-bold"
+  "class": "font-bold md:text-4xl"
 };
 var _hoisted_7 = {
-  "class": "md:text-4xl font-bold"
+  "class": "font-bold md:text-4xl"
 };
 
 var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
@@ -25575,22 +25832,22 @@ var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 var _hoisted_11 = {
-  "class": "mx-auto py-8 px-4 xl:px-16"
+  "class": "px-4 py-8 mx-auto xl:px-16"
 };
 
 var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
-  "class": "font-bold mb-4 md:mb-6 md:text-xl"
+  "class": "mb-4 font-bold md:mb-6 md:text-xl"
 }, "Categories", -1
 /* HOISTED */
 );
 
 var _hoisted_13 = {
-  "class": "grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-8"
+  "class": "grid grid-cols-2 gap-4 md:grid-cols-5 md:gap-8"
 };
 var _hoisted_14 = ["href"];
 var _hoisted_15 = ["src", "alt"];
 var _hoisted_16 = {
-  "class": "font-bold capitalize text-center"
+  "class": "font-bold text-center capitalize"
 };
 
 var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
@@ -25606,7 +25863,7 @@ var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 var _hoisted_19 = {
-  "class": "mx-auto py-8 px-4 xl:px-16"
+  "class": "px-4 py-8 mx-auto xl:px-16"
 };
 var _hoisted_20 = {
   "class": "grid grid-cols-2 md:grid-cols-3 bg-[#2B2F42] rounded-lg px-4 sm:px-16"
@@ -25615,7 +25872,7 @@ var _hoisted_21 = {
   "class": "text-[#5FC3DF] text-5xl font-bold"
 };
 var _hoisted_22 = {
-  "class": "text-white font-bold mb-1"
+  "class": "mb-1 font-bold text-white"
 };
 var _hoisted_23 = ["innerHTML"];
 
@@ -25632,16 +25889,16 @@ var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 var _hoisted_26 = {
-  "class": "mx-auto py-8 px-4 xl:px-16"
+  "class": "px-4 py-8 mx-auto xl:px-16"
 };
 
-var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"flex justify-between items-center mb-4 md:mb-6\"><h2 class=\"font-bold md:text-xl\">Why people love zooms design</h2><div class=\"flex space-x-2\"><button class=\"testi-pp2\"><svg class=\"w-5 h-5\" fill=\"#A1A6BF\" viewBox=\"0 0 23 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M22.8 22.2666C22.8 23.0399 22.1733 23.6666 21.4 23.6666C21.1611 23.6666 20.9357 23.6069 20.7392 23.501L1.60591 13.2343C1.16585 12.9982 0.866715 12.5343 0.866715 12C0.866716 11.4656 1.16585 11.0018 1.60591 10.7656L20.7393 0.498962C20.9357 0.393028 21.1611 0.333296 21.4001 0.333296C22.1733 0.333296 22.8001 0.96003 22.8001 1.7333L22.8 22.2666Z\"></path></svg></button><button class=\"testi-nn2\"><svg class=\"w-5 h-5\" fill=\"#0F1137\" viewBox=\"0 0 23 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M0.199951 1.73337C0.199951 0.960107 0.826684 0.333374 1.59995 0.333374C1.83888 0.333374 2.06428 0.393107 2.26075 0.499041L21.3941 10.7657C21.8342 11.0018 22.1333 11.4657 22.1333 12C22.1333 12.5344 21.8342 12.9982 21.3941 13.2344L2.26075 23.501C2.06428 23.607 1.83888 23.6667 1.59995 23.6667C0.826684 23.6667 0.199951 23.04 0.199951 22.2667V1.73337Z\"></path></svg></button></div></div>", 1);
+var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"flex items-center justify-between mb-4 md:mb-6\"><h2 class=\"font-bold md:text-xl\">Why people love zooms design</h2><div class=\"flex space-x-2\"><button class=\"testi-pp2\"><svg class=\"w-5 h-5\" fill=\"#A1A6BF\" viewBox=\"0 0 23 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M22.8 22.2666C22.8 23.0399 22.1733 23.6666 21.4 23.6666C21.1611 23.6666 20.9357 23.6069 20.7392 23.501L1.60591 13.2343C1.16585 12.9982 0.866715 12.5343 0.866715 12C0.866716 11.4656 1.16585 11.0018 1.60591 10.7656L20.7393 0.498962C20.9357 0.393028 21.1611 0.333296 21.4001 0.333296C22.1733 0.333296 22.8001 0.96003 22.8001 1.7333L22.8 22.2666Z\"></path></svg></button><button class=\"testi-nn2\"><svg class=\"w-5 h-5\" fill=\"#0F1137\" viewBox=\"0 0 23 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M0.199951 1.73337C0.199951 0.960107 0.826684 0.333374 1.59995 0.333374C1.83888 0.333374 2.06428 0.393107 2.26075 0.499041L21.3941 10.7657C21.8342 11.0018 22.1333 11.4657 22.1333 12C22.1333 12.5344 21.8342 12.9982 21.3941 13.2344L2.26075 23.501C2.06428 23.607 1.83888 23.6667 1.59995 23.6667C0.826684 23.6667 0.199951 23.04 0.199951 22.2667V1.73337Z\"></path></svg></button></div></div>", 1);
 
 var _hoisted_28 = {
   "class": "slider slider-testi"
 };
 var _hoisted_29 = {
-  "class": "border rounded-lg flex space-x-4 px-8 py-12"
+  "class": "flex px-8 py-12 space-x-4 border rounded-lg"
 };
 var _hoisted_30 = ["src"];
 var _hoisted_31 = {
@@ -25654,7 +25911,7 @@ var _hoisted_33 = {
   "class": "text-[#626262]"
 };
 
-var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"py-8\"></div><div class=\"mx-auto py-8 px-4 xl:px-16\"><h2 class=\"font-bold mb-4 md:text-xl\">We design with your favourite applications</h2><div class=\"\"><div class=\"lg:flex justify-between overflow-scroll grid grid-cols-3 md:grid-cols-5 gap-3 scrollbar-hide\"><div class=\"flex justify-center items-center\"><img src=\"/images/application/canva.png\" class=\"max-w-[100px] sm:max-w-[144px]\"></div><div class=\"flex justify-center items-center\"><img src=\"/images/application/ps.png\" class=\"max-w-[100px] sm:max-w-[144px]\"></div><div class=\"flex justify-center items-center\"><img src=\"/images/application/ai.png\" class=\"max-w-[100px] sm:max-w-[144px]\"></div><div class=\"flex justify-center items-center\"><img src=\"/images/application/id.png\" class=\"max-w-[100px] sm:max-w-[144px]\"></div><div class=\"flex justify-center items-center\"><img src=\"/images/application/ae.png\" class=\"max-w-[100px] sm:max-w-[144px]\"></div><div class=\"flex justify-center items-center\"><img src=\"/images/application/pwp.png\" class=\"max-w-[100px] sm:max-w-[144px]\"></div><div class=\"flex justify-center items-center\"><img src=\"/images/application/page.png\" class=\"max-w-[100px] sm:max-w-[144px]\"></div><div class=\"flex justify-center items-center\"><img src=\"/images/application/figma.png\" class=\"max-w-[100px] sm:max-w-[144px]\"></div></div></div></div><div class=\"py-8\"></div>", 3);
+var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"py-8\"></div><div class=\"px-4 py-8 mx-auto xl:px-16\"><h2 class=\"mb-4 font-bold md:text-xl\">We design with your favourite applications</h2><div class=\"\"><div class=\"grid justify-between grid-cols-3 gap-3 overflow-auto lg:flex md:grid-cols-5 scrollbar-hide\"><div class=\"flex items-center justify-center\"><img src=\"/images/application/canva.png\" class=\"max-w-[100px] sm:max-w-[144px]\"></div><div class=\"flex items-center justify-center\"><img src=\"/images/application/ps.png\" class=\"max-w-[100px] sm:max-w-[144px]\"></div><div class=\"flex items-center justify-center\"><img src=\"/images/application/ai.png\" class=\"max-w-[100px] sm:max-w-[144px]\"></div><div class=\"flex items-center justify-center\"><img src=\"/images/application/id.png\" class=\"max-w-[100px] sm:max-w-[144px]\"></div><div class=\"flex items-center justify-center\"><img src=\"/images/application/ae.png\" class=\"max-w-[100px] sm:max-w-[144px]\"></div><div class=\"flex items-center justify-center\"><img src=\"/images/application/pwp.png\" class=\"max-w-[100px] sm:max-w-[144px]\"></div><div class=\"flex items-center justify-center\"><img src=\"/images/application/page.png\" class=\"max-w-[100px] sm:max-w-[144px]\"></div><div class=\"flex items-center justify-center\"><img src=\"/images/application/figma.png\" class=\"max-w-[100px] sm:max-w-[144px]\"></div></div></div></div><div class=\"py-8\"></div>", 3);
 
 var _hoisted_37 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "py-8"
@@ -25715,7 +25972,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
       href: "/categories/".concat(cat.slug),
       style: (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeStyle)("background-color: ".concat(cat.bg_color)),
-      "class": "rounded aspect-square flex justify-center items-center flex-col space-y-2 hover:shadow-lg"
+      "class": "flex flex-col items-center justify-center space-y-2 rounded aspect-square hover:shadow-lg"
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       src: cat.image,
       alt: cat.name,
@@ -25731,14 +25988,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* KEYED_FRAGMENT */
   ))])]), _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Service bundle "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ServiceBundle"]), _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.flows, function (flow, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-      "class": "flex py-4 sm:py-12 space-x-4 items-start justify-start sm:justify-center",
+      "class": "flex items-start justify-start py-4 space-x-4 sm:py-12 sm:justify-center",
       key: index
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(index + 1), 1
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(flow.name), 1
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-      "class": "text-white/75 text-sm font-light",
+      "class": "text-sm font-light text-white/75",
       innerHTML: flow.desc
     }, null, 8
     /* PROPS */
@@ -26141,15 +26398,122 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _assets_tik_svg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../assets/tik.svg */ "./resources/js/assets/tik.svg");
+/* harmony import */ var _assets_explore_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../assets/explore.png */ "./resources/js/assets/explore.png");
+/* harmony import */ var _assets_tik2_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../assets/tik2.svg */ "./resources/js/assets/tik2.svg");
+/* harmony import */ var _assets_avater_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../assets/avater.png */ "./resources/js/assets/avater.png");
+/* harmony import */ var _assets_tik3_svg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../assets/tik3.svg */ "./resources/js/assets/tik3.svg");
+/* harmony import */ var _assets_design_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../assets/design.png */ "./resources/js/assets/design.png");
+/* harmony import */ var _assets_desk_png__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../assets/desk.png */ "./resources/js/assets/desk.png");
+
+
+
+
+
+
+
 
 var _hoisted_1 = {
   "class": ""
 };
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"relative px-4 py-8 md:py-12 xl:px-16\"><div class=\"absolute z-0 top-0 inset-x-0 h-[50%] bg-[#E0F9FF]\"></div><div class=\"relative\"><div class=\"flex justify-center text-center\"><h1 class=\"max-w-2xl text-3xl font-bold leading-10\"> Make great design <br> accessible to all businesses </h1></div><div class=\"mx-auto mt-10 bg-white rounded-sm shadow\"><div class=\"grid grid-cols-1 p-8 md:grid-cols-3 md:p-12 md:space-x-4\"><div><h2 class=\"mt-4 mb-8 text-xl font-bold\">Affordable services</h2><p class=\"text-[#505050]\">200+ of our services are created with affordable prices and one vision, to make great graphic design accessible for everyone</p></div><div><h2 class=\"mt-4 mb-8 text-xl font-bold\">Acceptable outcomes</h2><p class=\"text-[#505050]\">We&#39;ve worked with hundreds of brands from various fields. Our design focuses on connecting your brand with your audience to ensure that you get what you want</p></div><div><h2 class=\"mt-4 mb-8 text-xl font-bold\">Painless process</h2><p class=\"text-[#505050]\">Pick-Pay-Pop. As easy as that! No complicated process or contract is involved, We toned it down and keep our workflow as simple as possible</p></div></div><img src=\"/images/other/about-us.png\" alt=\"\" class=\"w-full\"></div></div></div>", 1);
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div id=\"hero\"><div class=\"px-4 py-8 mx-auto xl:px-16\"><div class=\"mx-auto max-w-[800px]\"><h1> Get ideal graphic design pack for your project </h1></div><div class=\"mt-10 priceCart\"><div class=\"grid items-start lg:grid-cols-10\"><!-- plan1 --><div class=\"p-10 lg:col-span-3 first crd plan1 lg:p-14\"><h3>Graphic Design Yearly Pack</h3><p>Get all graphic design services request within one year</p><div class=\"flex justify-center f1price priceSelect\"><button class=\"active\" value=\"25\">25</button><button value=\"35\">35</button><button value=\"45\">45</button></div><div class=\"price price1\">$ <span>750</span></div><span class=\"subttl\"> for <span class=\"crdtCunt\">25</span> credits (within <span class=\"durationCunt\">1 year</span>) </span><a href=\"https://t.me/zooms_group\" class=\"btn\">Get started</a></div><!-- plan 2 --><div class=\"relative p-10 lg:col-span-4 crd plan2 lg:p-14\"><h3>Graphic Design Monthly Pack</h3><p>Get all graphic design services request Billed monthly </p><div class=\"flex justify-center priceSelect\"><button class=\"active\" value=\"5\">5</button><button value=\"10\">10</button><button value=\"15\">15</button><button value=\"30\">30</button></div><div class=\"price\">$ <span>225</span></div><span class=\"subttl\">for <span class=\"crdtCunt\">5</span> credits (within <span class=\"durationCunt\">1 year</span>) </span><div class=\"agreementTerm\"> Pick your agreement term </div><select name=\"\" id=\"\" class=\"selectAgree\"><option selected value=\"1\">Popular monthly Service with No Agreement</option><option value=\"3\">Popular monthly Service 3 months Agreement ( Pay Montly ) </option><option value=\"6\">Popular monthly Service 6 months Agreement ( Pay Montly ) </option><option value=\"12\">Popular monthly Service 12 months Agreement ( Pay Montly ) </option></select><a href=\"https://t.me/zooms_group\" class=\"btn pp\">Get started</a></div><!-- plan3 --><div class=\"p-10 lg:col-span-3 plan3 last crd lg:p-14\"><h3>Remote Graphic Designer</h3><p>Monthly retainer graphic design Service Unlimited credit request</p><div class=\"flex justify-center priceSelect\"><button class=\"active\" value=\"1\">1</button><button value=\"2\">2</button><button value=\"3\">3</button><button value=\"4\">4</button></div><div class=\"price\">$ <span>450</span></div><span class=\"subttl\">for <span class=\"crdtCunt\">1</span> designer (within <span class=\"durationCunt\">1 month</span>) Price is estimated only Contact us for pricing </span><a href=\"https://t.me/zooms_group\" class=\"btn\">Get started</a></div></div></div></div></div><div class=\"lg:py-8\"></div>", 2);
+
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "py-8"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_5 = {
+  id: "works"
+};
+var _hoisted_6 = {
+  "class": "px-4 py-8 mx-auto xl:px-16"
+};
+
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
+  "class": "mb-5 subtitle !font-extrabold"
+}, " How it works ", -1
+/* HOISTED */
+);
+
+var _hoisted_8 = {
+  "class": "flex gap-5 tab"
+};
+
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  "class": "",
+  style: {
+    "--bg": "#E0F9FF",
+    "color": "#5CD0EB"
+  }
+}, "Step 1. Explore", -1
+/* HOISTED */
+);
+
+var _hoisted_10 = [_hoisted_9];
+
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  "class": ""
+}, "Step 2. Assign", -1
+/* HOISTED */
+);
+
+var _hoisted_12 = [_hoisted_11];
+
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  "class": ""
+}, "Step 3. Design ", -1
+/* HOISTED */
+);
+
+var _hoisted_14 = [_hoisted_13];
+
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div id=\"explore\" class=\"tabcontent active\"><div style=\"--bg:#E0F9FF;\" class=\"crd\"><div class=\"grid grid-cols-9\"><div class=\"col-span-7 p-3 lg:col-span-5 md:p-8\"><h3>We explore your monthly graphic design needs. Then we match you with the graphic designer that fit your demand.</h3><div><ul class=\"grid grid-cols-2 gap-x-5\"><li class=\"flex items-start gap-3\"><img src=\"" + _assets_tik_svg__WEBPACK_IMPORTED_MODULE_1__["default"] + "\" alt=\"\"> Learn about your brands &amp; products </li><li class=\"flex items-start gap-3\"><img src=\"" + _assets_tik_svg__WEBPACK_IMPORTED_MODULE_1__["default"] + "\" alt=\"\"> Your monthly demands on graphic design needs </li><li class=\"flex items-start gap-3\"><img src=\"" + _assets_tik_svg__WEBPACK_IMPORTED_MODULE_1__["default"] + "\" alt=\"\">Your team strength &amp; weakness </li><li class=\"flex items-start gap-3\"><img src=\"" + _assets_tik_svg__WEBPACK_IMPORTED_MODULE_1__["default"] + "\" alt=\"\">Learn from your past works </li><li class=\"flex items-start gap-3\"><img src=\"" + _assets_tik_svg__WEBPACK_IMPORTED_MODULE_1__["default"] + "\" alt=\"\"> Your target audiences </li><li class=\"flex items-start gap-3\"><img src=\"" + _assets_tik_svg__WEBPACK_IMPORTED_MODULE_1__["default"] + "\" alt=\"\">Whatever you need, we’ll look for the best </li></ul></div></div><div class=\"self-end col-span-2 -mb-3 lg:col-span-4 lg:self-auto lg:-mb-3 lg:-mt-3\"><img class=\"2xl:max-w-[71%] max-w-[165%] -ml-[60%] md:-ml-[35%] lg:max-w-[100%] lg:ml-0\" src=\"" + _assets_explore_png__WEBPACK_IMPORTED_MODULE_2__["default"] + "\" alt=\"\"></div></div></div></div>", 1);
+
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div id=\"assign\" class=\"tabcontent\"><div style=\"--bg:#FEF6E2;\" class=\"crd\"><div class=\"grid grid-cols-9\"><div class=\"col-span-7 p-3 lg:col-span-5 md:p-8\"><h3>We assign the dedicated designer that fits your monthly demand on graphic design tasks. </h3><div><ul class=\"grid grid-cols-2 gap-x-5\"><li class=\"flex items-start gap-3\"><img src=\"" + _assets_tik2_svg__WEBPACK_IMPORTED_MODULE_3__["default"] + "\" alt=\"\">Scout for the right designer </li><li class=\"flex items-start gap-3\"><img src=\"" + _assets_tik2_svg__WEBPACK_IMPORTED_MODULE_3__["default"] + "\" alt=\"\">Train designer with hard/soft skills needs </li><li class=\"flex items-start gap-3\"><img src=\"" + _assets_tik2_svg__WEBPACK_IMPORTED_MODULE_3__["default"] + "\" alt=\"\">Assessment with designer </li><li class=\"flex items-start gap-3\"><img src=\"" + _assets_tik2_svg__WEBPACK_IMPORTED_MODULE_3__["default"] + "\" alt=\"\">Language training for perfect communicaion </li><li class=\"flex items-start gap-3\"><img src=\"" + _assets_tik2_svg__WEBPACK_IMPORTED_MODULE_3__["default"] + "\" alt=\"\">Select skills that matches your needs </li><li class=\"flex items-start gap-3\"><img src=\"" + _assets_tik2_svg__WEBPACK_IMPORTED_MODULE_3__["default"] + "\" alt=\"\">Get the best fits for your needs </li></ul></div></div><div class=\"self-end col-span-2 -mb-6 lg:col-span-4 lg:self-center\"><img class=\"2xl:max-w-[75%] mx-auto max-w-[180%] -ml-[75%] md:-ml-[20%] lg:max-w-[100%] lg:ml-auto\" src=\"" + _assets_avater_png__WEBPACK_IMPORTED_MODULE_4__["default"] + "\" alt=\"\"></div></div></div></div>", 1);
+
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div id=\"design\" class=\"tabcontent\"><div style=\"--bg:#FEE0E2;\" class=\"crd\"><div class=\"grid grid-cols-9\"><div class=\"col-span-7 p-3 lg:col-span-5 md:p-8\"><h3>Start your trial for 1-3 months, no contract and hustle free. Explore how the dedicated designer can fit with your team. </h3><div><ul class=\"grid grid-cols-2 gap-x-5\"><li class=\"flex items-start gap-3\"><img src=\"" + _assets_tik3_svg__WEBPACK_IMPORTED_MODULE_5__["default"] + "\" alt=\"\">Up to 3 months trial without contract </li><li class=\"flex items-start gap-3\"><img src=\"" + _assets_tik3_svg__WEBPACK_IMPORTED_MODULE_5__["default"] + "\" alt=\"\">Get more than one designer needs </li><li class=\"flex items-start gap-3\"><img src=\"" + _assets_tik3_svg__WEBPACK_IMPORTED_MODULE_5__["default"] + "\" alt=\"\">Unlimited request </li><li class=\"flex items-start gap-3\"><img src=\"" + _assets_tik3_svg__WEBPACK_IMPORTED_MODULE_5__["default"] + "\" alt=\"\">Not satisfied? Request for a new designer </li><li class=\"flex items-start gap-3\"><img src=\"" + _assets_tik3_svg__WEBPACK_IMPORTED_MODULE_5__["default"] + "\" alt=\"\">Your monthly graphic design demand </li><li class=\"flex items-start gap-3\"><img src=\"" + _assets_tik3_svg__WEBPACK_IMPORTED_MODULE_5__["default"] + "\" alt=\"\">Cancel supscription anytime during trial </li></ul></div></div><div class=\"self-end col-span-2 -mb-4 lg:col-span-4 md:-mb-3 md:-mt-3 lg:self-auto\"><img class=\"2xl:max-w-[85%] mx-auto max-w-[167%] -ml-[60%] md:-ml-[20%] lg:max-w-[100%] lg:ml-auto\" src=\"" + _assets_design_png__WEBPACK_IMPORTED_MODULE_6__["default"] + "\" alt=\"\"></div></div></div></div>", 1);
+
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"px-4 py-8 mx-auto xl:px-16\"><h2 class=\"mb-4 font-bold md:text-xl\">We design with your favourite applications</h2><div class=\"\"><div class=\"grid justify-between grid-cols-3 gap-3 overflow-auto lg:flex md:grid-cols-5 scrollbar-hide\"><div class=\"flex items-center justify-center\"><img src=\"/images/application/canva.png\" class=\"max-w-[100px] sm:max-w-[144px]\"></div><div class=\"flex items-center justify-center\"><img src=\"/images/application/ps.png\" class=\"max-w-[100px] sm:max-w-[144px]\"></div><div class=\"flex items-center justify-center\"><img src=\"/images/application/ai.png\" class=\"max-w-[100px] sm:max-w-[144px]\"></div><div class=\"flex items-center justify-center\"><img src=\"/images/application/id.png\" class=\"max-w-[100px] sm:max-w-[144px]\"></div><div class=\"flex items-center justify-center\"><img src=\"/images/application/ae.png\" class=\"max-w-[100px] sm:max-w-[144px]\"></div><div class=\"flex items-center justify-center\"><img src=\"/images/application/pwp.png\" class=\"max-w-[100px] sm:max-w-[144px]\"></div><div class=\"flex items-center justify-center\"><img src=\"/images/application/page.png\" class=\"max-w-[100px] sm:max-w-[144px]\"></div><div class=\"flex items-center justify-center\"><img src=\"/images/application/figma.png\" class=\"max-w-[100px] sm:max-w-[144px]\"></div></div></div></div><div class=\"py-8\"></div><section id=\"solution\"><div class=\"px-4 py-8 mx-auto xl:px-16\"><h3 class=\"max-w-xl\">Your solution for high demand graphic design </h3><div class=\"grid gap-10 lg:gap-16 lg:grid-cols-9\"><div class=\"lg:col-span-4\"><img class=\"hidden mt-10 lg:block\" src=\"" + _assets_desk_png__WEBPACK_IMPORTED_MODULE_7__["default"] + "\" alt=\"\"></div><div class=\"lg:mt-16 lg:col-span-5\"><div class=\"grid grid-cols-2 gap-3 md:gap-10\"><div class=\"crd\"><h4>All designer are guranteed</h4><p> Guranteed to get the right designer that fits your demand. Unhappy with designer? You can request for a new one </p></div><div class=\"crd\"><h4>Vetted <br> graphic designer</h4><p> All designers are trained with language, soft skills, hard skills to make communicating seemless. </p></div><div class=\"mt-2 crd md:mt-5\"><h4>Like hiring <br> in-house </h4><p> Designers are available during working hours just like an in-house. 8 hours/Day, 5 Days/Week </p></div><div class=\"mt-2 crd md:mt-5\"><h4>Flexible <br> term</h4><p> Flexible contract term, hire graphic designers for 6 months or 12 months, no extra fee charge </p></div></div></div></div></div></section><section id=\"footerBtm\"><div class=\"px-4 py-8 mx-auto xl:px-16\"><div class=\"wrp\"><div class=\"items-center gap-16 lg:grid lg:grid-cols-10\"><div class=\"lft lg:col-span-4\"><h3>Tired of having the wrong designer for the job?</h3><div class=\"flex max-w-sm gap-2 mx-auto mt-5 lg:max-w-none md:gap-5\"><a href=\"https://t.me/zooms_group\" class=\"bg-[#5FC3DF] hover:opacity-90 text-white font-bold rounded px-4 xl:px-8 py-3 text-sm lg:text-base\">Get started</a></div></div><div class=\"mr-0 rght lg:col-span-6\"><div class=\"wraperr\"><div class=\"heroSlider\"><div class=\"slide\"><div class=\"crd\"><p class=\"ttl\">Multimedia Designer</p><ul><li> Video Editing </li><li> Motion Graphic </li><li> GIF &amp; Effect </li></ul></div></div><div class=\"slide\"><div class=\"crd\"><p class=\"ttl\">Logo &amp; Branding Designer</p><ul><li> Logo Design </li><li> Brand Identity </li><li> Brand Visual </li></ul></div></div><div class=\"slide\"><div class=\"crd\"><p class=\"ttl\">Social Media Designer</p><ul><li> Social Media Design </li><li> Content &amp; Creative </li><li> GIF and Motion Graphic </li></ul></div></div><div class=\"slide\"><div class=\"crd\"><p class=\"ttl\"> Ads &amp; Marketing Designer</p><ul><li> Social Media Design </li><li> Content &amp; Creative </li><li> GIF and Motion Graphic </li></ul></div></div><div class=\"slide\"><div class=\"crd\"><p class=\"ttl\"> Web &amp; App Designer</p><ul><li> UX / UI </li><li> Button &amp; Icon </li><li> Landing page design </li></ul></div></div><div class=\"slide\"><div class=\"crd\"><p class=\"ttl\"> Publication Designer</p><ul><li> Book &amp; Cover </li><li> Catalog </li><li> Calendar </li></ul></div></div><div class=\"slide\"><div class=\"crd\"><p class=\"ttl\"> Packaging Designer</p><ul><li> Product Label </li><li> Packaging &amp; Label </li><li> Box &amp; Product </li></ul></div></div><div class=\"slide\"><div class=\"crd\"><p class=\"ttl\"> Illustration Designer</p><ul><li> Illustration </li><li> Visual Art </li><li> 2D &amp; 3D Character </li></ul></div></div></div></div></div></div></div></div></section>", 4);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["DesignCategoryMenu"]), _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["TrustedBrand"])]);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["DesignCategoryMenu"]), _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["HaveQuestion"], {
+    page: "ABOUT_US"
+  }), _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Tab links "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": "flex-grow pb-5 tablinks active lg:pb-10",
+    style: {
+      "--bg": "#E0F9FF"
+    },
+    onMouseover: _cache[0] || (_cache[0] = function ($event) {
+      return $options.openTab($event, 'explore');
+    })
+  }, _hoisted_10, 32
+  /* HYDRATE_EVENTS */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": "flex-grow pb-5 tablinks lg:pb-10",
+    style: {
+      "--bg": "#FEF6E2",
+      "color": "#FAD16F"
+    },
+    onMouseover: _cache[1] || (_cache[1] = function ($event) {
+      return $options.openTab($event, 'assign');
+    })
+  }, _hoisted_12, 32
+  /* HYDRATE_EVENTS */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": "flex-grow pb-5 tablinks lg:pb-10",
+    style: {
+      "--bg": "#FEE0E2",
+      "color": "#EC6B70"
+    },
+    onMouseover: _cache[2] || (_cache[2] = function ($event) {
+      return $options.openTab($event, 'design');
+    })
+  }, _hoisted_14, 32
+  /* HYDRATE_EVENTS */
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Tab content "), _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Tab content2 "), _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Tab content3 "), _hoisted_17])]), _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["TrustedBrand"])]);
 }
 
 /***/ }),
@@ -27124,6 +27488,30 @@ ___CSS_LOADER_EXPORT___.push([module.id, "\n.slider-banner .slick-slide {\n    p
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/page/Pricing.vue?vue&type=style&index=0&id=f5f4a6b8&lang=css":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/page/Pricing.vue?vue&type=style&index=0&id=f5f4a6b8&lang=css ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\nbody #solution {\r\n    padding: 80px 0\n}\nbody #solution h3 {\r\n    font-size: 44px;\r\n    line-height: 135%;\r\n    color: #2B2F42;\r\n    font-weight: 700\n}\nbody #solution .crd {\r\n    background: #FFFFFF;\r\n    box-shadow: 0px 10px 50px rgba(92, 208, 235, 0.25);\r\n    border-radius: 12px;\r\n    padding: 30px\n}\nbody #solution .crd p {\r\n    font-weight: 400;\r\n    font-size: 16px;\r\n    line-height: 175%;\r\n    margin-top: 20px\n}\nbody #solution .crd h4 {\r\n    font-weight: 700;\r\n    font-size: 24px;\r\n    line-height: 144%;\r\n    color: #2B2F42;\n}\nbody #works {\r\n    padding-bottom: 80px\n}\nbody #works .tab {\r\n    overflow: hidden\n}\nbody #works .tab button {\r\n    font-weight: 700;\r\n    font-size: 19px;\r\n    line-height: 1.3;\r\n    padding: 30px;\r\n    background: var(--bg);\r\n    border-radius: 12px;\r\n    width: 100%;\r\n    text-align: left\n}\nbody #works .tablinks.active {\r\n    background: var(--bg);\r\n    overflow: hidden;\r\n    border-radius: 12px 12px 0 0\n}\nbody #works .tab button.active {\r\n    background-color: #ccc\n}\nbody #works .tabcontent {\r\n    display: none\n}\nbody #works .tabcontent.active {\r\n    display: block\n}\nbody #works #explore .crd {\r\n    border-top-left-radius: 0\n}\nbody #works #design .crd {\r\n    border-top-right-radius: 0\n}\nbody #works .crd {\r\n    border-radius: 12px;\r\n    background: var(--bg)\n}\nbody #works .crd h3 {\r\n    font-weight: 700;\r\n    font-size: 22px;\r\n    line-height: 1.4;\r\n    margin-bottom: 30px\n}\nbody #works .crd ul li {\r\n    font-size: 16px;\r\n    line-height: 133%;\r\n    margin-bottom: 15px\n}\n#hero {\r\n    padding: 30px 0;\r\n    background: linear-gradient(180deg, #E0F9FF 50%, #fff 50%);\n}\n#hero h1 {\r\n    font-size: 48px;\r\n    font-weight: 700;\r\n    text-align: center;\r\n    color: #2B2F42;\r\n\r\n    /* or  */\n}\n#hero .crd {\r\n    background-color: #fff;\r\n    box-shadow: 0px 0px 20px #e7e1ff;\n}\n#hero .crd p,\r\n.subttl {\r\n    font-weight: 400;\r\n    font-size: 17px;\r\n    line-height: 167%;\r\n    text-align: center;\r\n    color: #2B2F42;\r\n    display: block;\n}\n.subttl {\r\n    font-weight: 400;\r\n    font-size: 17px;\r\n    line-height: 167%;\r\n    text-align: center;\r\n    color: #2B2F42;\r\n    display: block;\r\n    margin-top: 20px;\n}\n.crd .btn {\r\n    width: 100%;\r\n    max-width: 280px;\r\n    text-align: center;\r\n    margin: 0 auto;\r\n    background: #5CD0EB;\r\n    border-radius: 6px;\r\n    display: block;\r\n    font-weight: 700;\r\n    font-size: 24px;\r\n    text-align: center;\r\n    color: #FFFFFF;\r\n    padding: 10px 15px;\r\n    margin-top: 35px;\r\n    transition: .3s ease;\n}\n.btn.pp {\r\n    background: #2B2F42;\n}\n.crd .btn:hover {\r\n    opacity: 0.7;\n}\n#hero .first {\r\n    box-shadow: -5px 0 10px #e7e1ffc6;\r\n    border-radius: 20px 0px 0px 20px;\n}\n#hero .last {\r\n    box-shadow: 5px 0 10px #e7e1ffc6;\r\n    border-radius: 0px 20px 20px 0px;\n}\n#hero .crd h3 {\r\n    color: #2B2F42;\r\n    font-weight: 700;\r\n    font-size: 24px;\r\n    text-align: center;\r\n    line-height: 125%;\r\n    margin-bottom: 19px;\n}\n#hero .crd button {\r\n    padding: 8px 25px;\r\n    /* font-family: 'DM Sans'; */\r\n    font-size: 20px;\r\n    font-weight: 600;\r\n    color: #2B2F42;\n}\n#hero .crd button.active,\r\n#hero .crd button:hover {\r\n    background: #E0F9FF;\n}\n.priceSelect {\r\n    margin-top: 40px;\n}\n.agreementTerm {\r\n    font-weight: 700;\r\n    font-size: 18px;\r\n    line-height: 22px;\r\n    text-align: center;\r\n    color: #2B2F42;\r\n    margin-top: 30px;\n}\n.crd .price {\r\n    color: #2B2F42;\r\n    font-weight: 700;\r\n    font-size: 48px;\r\n    text-align: center;\r\n    margin-top: 30px;\n}\n.selectAgree {\r\n    background-color: #E0F9FF;\r\n    border-radius: 6px;\r\n    border: none;\r\n    color: #2B2F42;\r\n    margin: 0 auto;\r\n    display: block;\r\n    margin-top: 20px;\r\n    max-width: 500px !important;\r\n    width: 100%;\n}\nbody #footerBtm .wrp {\r\n    background: #E0F9FF;\r\n    border-radius: 12px;\r\n    padding: 40px;\n}\nbody #footerBtm .lft h3 {\r\n    color: #2B2F42;\r\n    font-size: 48px;\r\n    font-weight: 700\n}\nbody #footerBtm .lft p {\r\n    font-size: 16px;\r\n    color: #fff;\r\n    margin-top: 20px\n}\nbody #footerBtm .lft .btn {\r\n    font-size: 18px\n}\nbody #footerBtm .lft .btn2 {\r\n    background: #E0F9FF;\r\n    color: #2B2F42\n}\nbody #footerBtm .rght .slick-track {\r\n    padding: 70px 0;\r\n    display: flex;\r\n    align-items: stretch;\r\n    width: 100%\n}\nbody #footerBtm .rght .slick-current {\r\n    opacity: 1 !important\n}\nbody #footerBtm .rght .slick-active:not(.slick-current) {\r\n    opacity: 1\n}\nbody #footerBtm .rght .slide {\r\n    padding: 0 10px;\r\n    height: auto\n}\nbody #footerBtm .rght .crd {\r\n    background: #FFFFFF;\r\n    border-radius: 8px;\r\n    padding: 30px;\r\n    box-shadow: 0px 1px 13px rgb(92 208 235 / 68%);\r\n    height: 100%\n}\nbody #footerBtm .rght .crd .ttl {\r\n    font-size: 22px;\r\n    text-align: center;\r\n    color: #2B2F42;\r\n    font-weight: 600;\r\n    margin-bottom: 10px\n}\nbody #footerBtm .rght .crd ul>li {\r\n    color: #2B2F42;\r\n    font-size: 16px;\r\n    margin-top: 5px;\r\n    font-weight: 600;\r\n    text-align: center\n}\n@media screen and (max-width: 825px) {\nbody #works .tab button {\r\n        font-size: 16px\n}\nbody #works .crd h3 {\r\n        font-size: 16px\n}\nbody #works .crd ul li {\r\n        font-size: 12px;\r\n        line-height: 133%;\r\n        margin-bottom: 9px\n}\n#hero .first {\r\n    border-radius: 20px 20px 0px 0px;\n}\n#hero .last {\r\n    border-radius: 0px 0 20px 20px;\n}\n}\n@media screen and (max-width: 576px) {\nbody #works .tab button {\r\n        font-size: 10px;\r\n        padding: 11px\n}\n#hero h1 {\r\n    font-size: 32px;\n}\nbody #works .crd h3 {\r\n        font-size: 11px\n}\nbody #works .crd ul li {\r\n        gap: 4px;\r\n        font-size: 8px\n}\nbody #works .crd ul li img {\r\n        width: 14px\n}\nbody #works .tablinks {\r\n        padding-bottom: 10px\n}\nbody #solution .crd {\r\n        padding: 16px;\n}\nbody #solution .crd p {\r\n\r\n        font-size: 13px;\n}\nbody #solution .crd h4 {\r\n        font-size: 16px;\n}\nbody #footerBtm .wrp {\r\n\r\n        padding: 13px;\n}\nbody #footerBtm .lft h3 {\r\n \r\n    font-size: 30px;}\nbody #solution h3 {\r\n    font-size: 30px;}\nbody #solution {\r\n    padding: 16px 0;\n}\n#hero .crd h3 {\r\n   \r\n    font-size: 21px;}\n#hero .crd p, .subttl {\r\n    font-size: 15px;}\n}\r\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/runtime/api.js":
 /*!*****************************************************!*\
   !*** ./node_modules/css-loader/dist/runtime/api.js ***!
@@ -27200,6 +27588,66 @@ module.exports = function (cssWithMappingToString) {
 
 /***/ }),
 
+/***/ "./resources/js/assets/avater.png":
+/*!****************************************!*\
+  !*** ./resources/js/assets/avater.png ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/avater.png?2ed47e2d2ea761cf29406efe0ce2efa6");
+
+/***/ }),
+
+/***/ "./resources/js/assets/design.png":
+/*!****************************************!*\
+  !*** ./resources/js/assets/design.png ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/design.png?539a21d815fcf8a9d7c60d73523ace4b");
+
+/***/ }),
+
+/***/ "./resources/js/assets/desk.png":
+/*!**************************************!*\
+  !*** ./resources/js/assets/desk.png ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/desk.png?c64025e7ba962b8c105f6374e662907d");
+
+/***/ }),
+
+/***/ "./resources/js/assets/explore.png":
+/*!*****************************************!*\
+  !*** ./resources/js/assets/explore.png ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/explore.png?fd73bcf16d178323eddbac6de4db4a43");
+
+/***/ }),
+
 /***/ "./resources/js/assets/logo.png":
 /*!**************************************!*\
   !*** ./resources/js/assets/logo.png ***!
@@ -27212,6 +27660,51 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/logo.png?0104db8409b73070533a3e981c18e573");
+
+/***/ }),
+
+/***/ "./resources/js/assets/tik.svg":
+/*!*************************************!*\
+  !*** ./resources/js/assets/tik.svg ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/tik.svg?8ad6cd620a165c82de264f8af9dc21c0");
+
+/***/ }),
+
+/***/ "./resources/js/assets/tik2.svg":
+/*!**************************************!*\
+  !*** ./resources/js/assets/tik2.svg ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/tik2.svg?828d6751741f3374060252713fa3e62c");
+
+/***/ }),
+
+/***/ "./resources/js/assets/tik3.svg":
+/*!**************************************!*\
+  !*** ./resources/js/assets/tik3.svg ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/tik3.svg?d34044dc0d1373b181ee37931f14598d");
 
 /***/ }),
 
@@ -35385,6 +35878,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/page/Pricing.vue?vue&type=style&index=0&id=f5f4a6b8&lang=css":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/page/Pricing.vue?vue&type=style&index=0&id=f5f4a6b8&lang=css ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_use_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Pricing_vue_vue_type_style_index_0_id_f5f4a6b8_lang_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Pricing.vue?vue&type=style&index=0&id=f5f4a6b8&lang=css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/page/Pricing.vue?vue&type=style&index=0&id=f5f4a6b8&lang=css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_use_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Pricing_vue_vue_type_style_index_0_id_f5f4a6b8_lang_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_use_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Pricing_vue_vue_type_style_index_0_id_f5f4a6b8_lang_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js":
 /*!****************************************************************************!*\
   !*** ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
@@ -36601,13 +37124,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Pricing_vue_vue_type_template_id_f5f4a6b8__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Pricing.vue?vue&type=template&id=f5f4a6b8 */ "./resources/js/page/Pricing.vue?vue&type=template&id=f5f4a6b8");
 /* harmony import */ var _Pricing_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Pricing.vue?vue&type=script&setup=true&lang=js */ "./resources/js/page/Pricing.vue?vue&type=script&setup=true&lang=js");
-/* harmony import */ var C_Users_arif_Downloads_new_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _Pricing_vue_vue_type_style_index_0_id_f5f4a6b8_lang_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Pricing.vue?vue&type=style&index=0&id=f5f4a6b8&lang=css */ "./resources/js/page/Pricing.vue?vue&type=style&index=0&id=f5f4a6b8&lang=css");
+/* harmony import */ var C_Users_arif_Downloads_new_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_Users_arif_Downloads_new_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_Pricing_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Pricing_vue_vue_type_template_id_f5f4a6b8__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/page/Pricing.vue"]])
+
+
+const __exports__ = /*#__PURE__*/(0,C_Users_arif_Downloads_new_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_Pricing_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Pricing_vue_vue_type_template_id_f5f4a6b8__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/page/Pricing.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -37934,6 +38460,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_use_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Home_vue_vue_type_style_index_0_id_1d9ee871_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Home.vue?vue&type=style&index=0&id=1d9ee871&lang=css */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/page/Home.vue?vue&type=style&index=0&id=1d9ee871&lang=css");
+
+
+/***/ }),
+
+/***/ "./resources/js/page/Pricing.vue?vue&type=style&index=0&id=f5f4a6b8&lang=css":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/page/Pricing.vue?vue&type=style&index=0&id=f5f4a6b8&lang=css ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_use_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Pricing_vue_vue_type_style_index_0_id_f5f4a6b8_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Pricing.vue?vue&type=style&index=0&id=f5f4a6b8&lang=css */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/page/Pricing.vue?vue&type=style&index=0&id=f5f4a6b8&lang=css");
 
 
 /***/ }),
