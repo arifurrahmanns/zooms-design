@@ -43,7 +43,7 @@ class ItemResource extends Resource
                                     ->schema([
                                         TextInput::make('title')->required()
                                             ->reactive()
-                                            ->afterStateUpdated(fn($state, callable $set) => $set('slug', Str::slug($state))),
+                                            ->afterStateUpdated(fn ($state, callable $set) => $set('slug', Str::slug($state))),
                                         TextInput::make('slug')->required(),
                                         TextInput::make('desc')->label('Description')->required(),
                                         Select::make('category_id')
@@ -60,7 +60,7 @@ class ItemResource extends Resource
                                             ->imagePreviewHeight('200')
                                             ->panelLayout('compact')
                                             ->enableReordering(),
-                                ]),
+                                    ]),
                                 Card::make()
                                     ->schema([
                                         Placeholder::make('Plan Details'),
@@ -77,15 +77,14 @@ class ItemResource extends Resource
                                                 Textarea::make('features')->label('Features (separate by new line)')
                                                     ->required()
                                                     ->default("Source files provided\nJPG, PDF, PNG, Adobe Illustrator\n1 option design"),
-                                                TextInput::make('price')->label('Price $')
-                                                    ->required()
-                                                    ->numeric()
-                                                    ->reactive()
-                                                    ->afterStateUpdated(fn($state, callable $set, callable $get) => $set('price_discount', $state - ($get('discount') / 100 * $state))),
+                                                Textarea::make('price')->label('Price $')
+                                                    ->required(),
+                                                // ->reactive(),
+                                                // ->afterStateUpdated(fn ($state, callable $set, callable $get) => $set('price_discount', $state - ($get('discount') / 100 * $state))),
                                                 TextInput::make('discount')->label('Discount %')
                                                     ->numeric()
                                                     ->reactive()
-                                                    ->afterStateUpdated(fn($state, callable $set, callable $get) => $set('price_discount', $get('price') - ($state / 100 * $get('price')))),
+                                                    ->afterStateUpdated(fn ($state, callable $set, callable $get) => $set('price_discount', $get('price') - ($state / 100 * $get('price')))),
                                                 TextInput::make('price_discount')->label('Price after discount $')
                                                     ->numeric(),
                                                 TextInput::make('link')->label('Order Link')
@@ -105,31 +104,31 @@ class ItemResource extends Resource
                                             ])
                                             ->required()
                                             ->grid(3),
-                                ]),
-                        ]),
+                                    ]),
+                            ]),
                         Grid::make()->columnSpan(2)
                             ->schema([
-                            Card::make()
-                            ->schema([
-                                Placeholder::make('Status'),
-                                Toggle::make('is_visible')
-                                    ->default(true)
-                                    ->label('Visible')
-                                    ->helperText('This will be visible/hidden from viewer'),
-                                Toggle::make('is_popular')
-                                    ->default(false)
-                                    ->label('Popular Item')
-                                    ->helperText('This will be show in the popular section.'),
-                            ]),
-                            Forms\Components\Card::make()
-                                ->schema([
-                                    Forms\Components\Placeholder::make('created_at')
-                                        ->label('Created at')
-                                        ->content(fn (?Item $record): string => $record ? $record->created_at->diffForHumans() : '-'),
-                                    Forms\Components\Placeholder::make('updated_at')
-                                        ->label('Last modified at')
-                                        ->content(fn (?Item $record): string => $record ? $record->updated_at->diffForHumans() : '-'),
-                                ])
+                                Card::make()
+                                    ->schema([
+                                        Placeholder::make('Status'),
+                                        Toggle::make('is_visible')
+                                            ->default(true)
+                                            ->label('Visible')
+                                            ->helperText('This will be visible/hidden from viewer'),
+                                        Toggle::make('is_popular')
+                                            ->default(false)
+                                            ->label('Popular Item')
+                                            ->helperText('This will be show in the popular section.'),
+                                    ]),
+                                Forms\Components\Card::make()
+                                    ->schema([
+                                        Forms\Components\Placeholder::make('created_at')
+                                            ->label('Created at')
+                                            ->content(fn (?Item $record): string => $record ? $record->created_at->diffForHumans() : '-'),
+                                        Forms\Components\Placeholder::make('updated_at')
+                                            ->label('Last modified at')
+                                            ->content(fn (?Item $record): string => $record ? $record->updated_at->diffForHumans() : '-'),
+                                    ])
                             ])
 
                     ])
