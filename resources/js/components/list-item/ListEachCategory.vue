@@ -24,7 +24,7 @@ export default {
                     <div class="text-center text-sm">
                         <h2 class="font-bold mb-1">{{item.title}}</h2>
                         <p class="text-[#999999] mb-2 text-xs">{{item.category.name}} </p>
-                        <p class="text-[#5FC3DF] font-semibold" :style="`color: ${color}`">$ {{item.price}}</p>
+                        <p class="text-[#5FC3DF] font-semibold" :style="`color: ${color}`">{{item.price}}</p>
                     </div>
                 </a>
             </div>

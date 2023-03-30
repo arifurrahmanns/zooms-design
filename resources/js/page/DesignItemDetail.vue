@@ -129,10 +129,10 @@ export default {
         <design-category-menu/>
         <Breadcrum :bgcolor="getCategory().bg_color" :breadcrumbs="breadcrumbs"
             :description="getCategory().desc"/>
-        <div class="mx-auto px-4 mt-14 xl:px-16">
-            <div class="grid gap-4 grid-cols-1 lg:grid-cols-2">
+        <div class="px-4 mx-auto mt-14 xl:px-16">
+            <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
                 <div class="mb-12 md:mb-20 lg:mb-0">
-                    <div class="slider slider-single mb-3">
+                    <div class="mb-3 slider slider-single">
                         <div v-for="image in images">
                             <img :src="image.thumb" class="min-w-full">
                         </div>
@@ -147,7 +147,7 @@ export default {
                     <div id="item-detail">
                         <ul class="grid grid-cols-3 mb-0 list-none border-b-0 border-[1px] border-[#DADBDD]">
                             <li v-for="(plan, index) in plans" :key="plan.id" class="flex-auto text-center">
-                                <a class="font-bold text-white px-5 block py-3 cursor-pointer hover:opacity-80"
+                                <a class="block px-5 py-3 font-bold text-white cursor-pointer hover:opacity-80"
                                     :style="openTab === index ? `background-color: ${getCategory().color};`: `background-color: #FAFAFA;color:#A1A6BF;`"
                                     @click="toggleTabs(index)">
                                     {{ plan.title }}
@@ -155,12 +155,12 @@ export default {
                             </li>
                         </ul>
                         <div class="bg-white border-[1px] border-[#DADBDD]">
-                            <div class="px-6 lg:p-8 py-10 flex-auto">
+                            <div class="flex-auto px-6 py-10 lg:p-8">
                                 <div class="tab-content tab-space">
                                     <div>
-                                        <div class="flex justify-between items-center mb-4">
+                                        <div class="flex items-center justify-between mb-4">
                                             <h4 class="text-[#404145] font-bold text-lg" v-text="currentPlan.sub_title"></h4>
-                                            <span class="text-lg font-bold" :style="`color: ${getCategory().color}`" v-text="`$ ${currentPlan.price}`"></span>
+                                            <span class="text-lg font-bold" :style="`color: ${getCategory().color}`" v-text="`${currentPlan.price}`"></span>
                                         </div>
                                         <p class="text-[#62646A] mb-10" v-text="currentPlan.desc"></p>
                                         <div class="grid grid-cols-1 md:grid-cols-2 text-[#2B2F42] font-bold mb-9">
@@ -179,17 +179,17 @@ export default {
                                                 <span v-text="feature"></span>
                                             </li>
                                         </ul>
-                                        <div class="md:flex justify-between text-xs mb-2">
+                                        <div class="justify-between mb-2 text-xs md:flex">
                                             <p class="text-[#959597] mb-3 md:mb-0">Price in US dollars, excludes local tax.</p>
                                             <p class="text-[#959597]">T&C Applied</p>
                                         </div>
-                                        <div v-if="!screenshoting" class="grid md:grid-cols-2 lg:grid-cols-1 gap-4">
+                                        <div v-if="!screenshoting" class="grid gap-4 md:grid-cols-2 lg:grid-cols-1">
                                             <button @click="order(currentPlan)"
                                                 :style="`background-color: ${getCategory().color}`"
-                                                class="text-center text-white font-bold py-3 rounded hover:opacity-80">Order</button>
+                                                class="py-3 font-bold text-center text-white rounded hover:opacity-80">Order</button>
                                             <a :href="contactSaleUrl"
                                                 :style="`color: ${getCategory().color}; background-color: ${getCategory().bg_color}`"
-                                                class="block text-center font-bold py-3 rounded hover:opacity-80">Contact Sale</a>
+                                                class="block py-3 font-bold text-center rounded hover:opacity-80">Contact Sale</a>
                                         </div>
                                     </div>
                                 </div>
@@ -199,10 +199,10 @@ export default {
                 </div>
             </div>
         </div>
-        <div v-if="relatedItems.length > 0" class="mx-auto py-8 px-4 xl:px-16">
-            <div class="flex justify-between items-center mb-4 md:mb-6">
-                <h2 class="font-semibold md:text-xl capitalize" :style="`color: ${category.color}`">{{ category.name }} </h2>
-                <a :href="`/categories/${category.slug}`" class="flex space-x-3 items-center hover:animate-bounceX">
+        <div v-if="relatedItems.length > 0" class="px-4 py-8 mx-auto xl:px-16">
+            <div class="flex items-center justify-between mb-4 md:mb-6">
+                <h2 class="font-semibold capitalize md:text-xl" :style="`color: ${category.color}`">{{ category.name }} </h2>
+                <a :href="`/categories/${category.slug}`" class="flex items-center space-x-3 hover:animate-bounceX">
                     <span class="font-semibold md:text-xl" :style="`color: ${category.color}`">
                         See more
                     </span>
@@ -211,14 +211,14 @@ export default {
                     </svg>
                 </a>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-8 snap-x">
+            <div class="grid grid-cols-2 gap-2 md:grid-cols-4 md:gap-8 snap-x">
                 <div v-for="item in relatedItems" :key="item.id" class="snap-center">
                     <a :href="`/items/${item.slug}`" class="border border-[#EBEBEB] rounded flex flex-col p-3 hover:shadow-lg hover:cursor-pointer">
                         <img :src="item.media" :alt="item.title" class="mb-2">
-                        <div class="text-center text-sm">
-                            <h2 class="font-bold mb-1">{{item.title}}</h2>
+                        <div class="text-sm text-center">
+                            <h2 class="mb-1 font-bold">{{item.title}}</h2>
                             <p class="text-[#999999] mb-2 text-xs">{{item.category.name}} </p>
-                            <p class="font-semibold" :style="`color: ${category.color}`">$ {{item.price}}</p>
+                            <p class="font-semibold" :style="`color: ${category.color}`">{{item.price}}</p>
                         </div>
                     </a>
                 </div>
